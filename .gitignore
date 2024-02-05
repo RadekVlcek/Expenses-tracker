@@ -1,0 +1,5 @@
+# ignore database file
+data.db
+
+# ignore all .pyc cache files
+*.pyc
