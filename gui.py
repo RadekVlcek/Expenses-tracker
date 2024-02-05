@@ -101,6 +101,7 @@ class Gui(Database):
             self.amount_spent_input.insert(END, selected_data[3])
 
     def update_data(self, event):
+        #
         self.all_records_list = self.fetch_data()
         ## add additional syntax check + if not empty!
         try:
