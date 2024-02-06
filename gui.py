@@ -13,7 +13,7 @@ class Gui(Database):
         self.RootWindow.geometry(screen)
         super().__init__(db_file)
 
-        self.all_records_list = []
+        self.all_records_list = self.fetch_data()
         self.actual_db_id = 0   # maybe set it to None?
         self.initial_rem_balance = 2000
 
@@ -38,12 +38,11 @@ class Gui(Database):
 
     def get_remaining_balance(self, amount_spent):
         # If DB is empty, initial rem. balance is 2000
-        if self.all_records_list == []:
-            return self.initial_rem_balance - amount_spent
+        if len(self.all_records_list) == 0:
+            self.initial_rem_balance -= amount_spent
         else:
             for record in self.all_records_list:
-                print("record: ", record[4])
-                self.initial_rem_balance = self.initial_rem_balance - record[4]
+                self.initial_rem_balance -= record[3]
 
     def submit_data(self, date, item_bought, amount_spent):
         self.all_records_list = self.fetch_data()
@@ -60,6 +59,7 @@ class Gui(Database):
         for col in fetched_data:
             self.all_records_list.append(col)
     
+        print("data fetched: ", self.all_records_list)
         return self.all_records_list
 
     def display_data(self):
@@ -101,7 +101,6 @@ class Gui(Database):
             self.amount_spent_input.insert(END, selected_data[3])
 
     def update_data(self, event):
-        #
         self.all_records_list = self.fetch_data()
         ## add additional syntax check + if not empty!
         try:
