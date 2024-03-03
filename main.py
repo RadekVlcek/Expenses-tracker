@@ -1,20 +1,63 @@
-from gui import Gui
+from window import Window
+from month import Month
+from day import Day
+from components.top_section import Top_section
+from components.top_right_section import Top_right_section
+from components.side_section import Side_section
+from components.bottom_section import Bottom_section
+from database.database import Database
 
-gui = Gui("data.db", "Expense tracker","1000x750")
+# Load up all components
+window_obj = Window()
+top_section_obj = Top_section()
+top_right_section_obj = Top_right_section()
+side_section_obj = Side_section(window_obj.selected_day, window_obj.selected_month, window_obj.selected_year)
+bottom_section_obj = Bottom_section()
 
-# Display GUI
-gui.build_frames()
-gui.build_date()
-gui.build_item_bought()
-gui.build_amount_spent()
-gui.build_submit_button()
-gui.build_update_button()
-gui.build_delete_button()
-gui.build_listbox()
-gui.build_remain_balance()
+# Display Top right section
+top_right_section_obj.display_frame8()
 
-# Fetch data
-gui.display_data()
+# Display months and days
+# Store pair of each "month name" with each "month object"
+months_objects = {}
+days_objects = {}
 
-# Run main window
-gui.run_window()
+for month, days_count in window_obj.months.items():
+    # Create separate m object for each month
+    month_obj = Month(month, days_count)
+
+    # Display each month
+    month_obj.display_month()
+
+    # Add each month object to dictionary
+    months_objects[month] = month_obj
+
+    # Display each day
+    day_index = 1
+    for row in range(5):
+        for col in range(7):
+            day_obj = Day(month_obj, row, col, top_right_section_obj.pass_top_right_section)
+            day_obj.display_day()
+            day_obj.populate_day_props(day_index)
+
+            if day_index >= month_obj.days_count:
+                break
+            else:
+                day_index += 1
+
+# Raise current month frame on startup
+months_objects[window_obj.curr_month].frame3.tkraise()
+
+# Display Top section
+top_section_obj.display_frame2(window_obj.months.keys(), months_objects, top_right_section_obj.pass_top_right_section)
+
+# Display Side section
+side_section_obj.display_frame7()
+
+side_section_obj.display_data()
+
+# Display Bottom section
+bottom_section_obj.display_frame9()
+
+# Display window
+window_obj.display_window()
