@@ -1,4 +1,4 @@
-**# Expenses tracker**
+# Expenses tracker
 
 Features:
 - GUI built using Tkinter library
