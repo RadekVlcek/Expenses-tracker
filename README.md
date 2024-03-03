@@ -1,4 +1,6 @@
-# Expenses tracker
+# Expenses tracker :euro:
+
+### ... in a form of calendar :calendar:
 
 Features:
 - GUI built using Tkinter library
