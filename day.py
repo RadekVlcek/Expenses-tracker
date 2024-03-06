@@ -12,7 +12,7 @@ class Day(Window):
         self.pass_top_right_section = pass_top_right_section
 
     def display_day(self):
-        self.f3_day_frame = Frame(self.frame3, bd=1, relief="solid")
+        self.f3_day_frame = Frame(self.frame3, bd=1, relief="solid", padx=0, pady=0)
         self.f3_day_frame.grid(row=self.row, column=self.col)
 
     def get_day_color(self, day_index):

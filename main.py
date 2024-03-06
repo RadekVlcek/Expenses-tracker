@@ -48,6 +48,8 @@ for month, days_count in window_obj.months.items():
 # Raise current month frame on startup
 months_objects[window_obj.curr_month].frame3.tkraise()
 
+month_obj.init_month_db(window_obj.curr_month, window_obj.selected_month)
+
 # Display Top section
 top_section_obj.display_frame2(window_obj.months.keys(), months_objects, top_right_section_obj.pass_top_right_section)
 

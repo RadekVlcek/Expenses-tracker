@@ -22,14 +22,15 @@ class Side_section(Window, Database):
     def display_data(self):
         data = self.fetch_data()
 
-        for index, item in enumerate(data):
-            item_name = item[3]
-            item_price = item[4]
-            item_remark = item[5]
+        if data is not None:
+            for index, item in enumerate(data):
+                item_name = item[3]
+                item_price = item[4]
+                item_remark = item[5]
 
-            Label(self.frame4, text=item_name, bg=self.look_feel_settings["dark_blue"]).grid(column=0, row=index+1)
-            Label(self.frame4, text=item_price, bg=self.look_feel_settings["dark_blue"]).grid(column=1, row=index+1)
-            Label(self.frame4, text=item_remark, bg=self.look_feel_settings["dark_blue"]).grid(column=2, row=index+1)
+                Label(self.frame4, text=item_name, fg="white", bg=self.look_feel_settings["dark_blue"]).grid(column=0, row=index+1)
+                Label(self.frame4, text=item_price, fg="white", bg=self.look_feel_settings["dark_blue"]).grid(column=1, row=index+1)
+                Label(self.frame4, text=item_remark, fg="white", bg=self.look_feel_settings["dark_blue"]).grid(column=2, row=index+1)
 
     def display_frame7(self):
         # Entire side parent frame
@@ -41,6 +42,9 @@ class Side_section(Window, Database):
         # Stats 1 section
         self.frame4 = Frame(frame7, bd=0, background=self.look_feel_settings["dark_blue"])
         self.frame4.grid(column=0, row=0, sticky="nswe", columnspan=3)
+
+        #self.canvas = Canvas(self.frame4, background=self.look_feel_settings["dark_blue"])
+        #self.canvas.grid(column=0, row=0, sticky="nswe")
 
         item_bought_label = Label(self.frame4, text="Item bought", fg="white", bg=self.look_feel_settings["dark_blue"])
         item_bought_label.grid(column=0, row=0, padx=15, sticky="n")

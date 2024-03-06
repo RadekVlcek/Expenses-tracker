@@ -18,7 +18,7 @@ class Window:
     curr_month = today.strftime("%B")
     curr_year = today.strftime("%Y")
 
-    # Currently selected day, month and year
+    # Initially selected day, month and year
     selected_day = curr_today
     selected_month = curr_month
     selected_year = curr_year

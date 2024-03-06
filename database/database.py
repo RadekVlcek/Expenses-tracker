@@ -7,7 +7,7 @@ class Database:
             self.conn = sqlite3.connect(db_file)
             self.cursor = self.conn.cursor()
         except sqlite3.Error as e:
-            print(e)
+            print(f"Error: {e}")
         else:
             print("Database connected")
 
@@ -26,6 +26,7 @@ class Database:
             print(e)
         else:
             self.conn.commit()
+            print("Day table created.")
 
     def insert_dayitem(self, day_id, month_id, item_name, item_price, remark):
         try:
@@ -34,7 +35,7 @@ class Database:
             print(e)
         else:
             self.conn.commit()
-            print("Data inserted")
+            print("Data inserted into Day table.")
 
     def fetch_dayitem_data(self):
         try:
@@ -58,3 +59,4 @@ class Database:
             print(e)
         else:
             self.conn.commit()
+            print("Month tablet created.")

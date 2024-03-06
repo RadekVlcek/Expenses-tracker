@@ -10,7 +10,6 @@ class Top_section(Window, Database):
     def __init__(self):
         self.window = super().window
         self.look_feel_settings = super().look_feel_settings
-        Database.__init__(self, "database/data/data.db")
 
     def raise_selected_month(self, event):
         selected_month = self.selected_month_str.get()
@@ -34,6 +33,7 @@ class Top_section(Window, Database):
         month_id = Window.selected_month
 
         if self.validate_data(item_name, item_price, item_remark):
+            Database.__init__(self, "database/data/data.db")
             self.create_day_table()
             self.insert_dayitem(day_id, month_id, item_name, item_price, item_remark)
             self.clear_entries()
