@@ -8,6 +8,7 @@ class Month(Window, Database):
         self.window = super().window
         self.look_feel_settings = super().look_feel_settings
         self.days_count = days_count
+        self.db_file = super().db_file
 
     def display_month(self):
         self.frame3 = Frame(self.window, bd=1, bg=self.look_feel_settings["light_blue"], relief="solid")
@@ -18,7 +19,7 @@ class Month(Window, Database):
     def init_month_db(self, curr_month, selected_month):
         if curr_month == selected_month:
             print(f"Creating DB table for {selected_month}.")
-            Database.__init__(self, "database/data/data.db")
+            Database.__init__(self, self.db_file)
             Database.create_month_table(self)
 
     def handle_month_input(self, item_price):
@@ -37,18 +38,18 @@ class Month(Window, Database):
         total_spent_today = item_price
         remaining_balance = None
 
-        Database.__init__(self, "database/data/data.db")
+        Database.__init__(self, self.db_file)
         Database.insert_monthitem(self, self.month_id, self.day_id, self.year_id, total_spent_today, remaining_balance)
 
     def update_monthitem(self):
         new_total_spent_today = self.calculate_daily_spent()
 
-        Database.__init__(self, "database/data/data.db")
+        Database.__init__(self, self.db_file)
         Database.update_monthitem(self, self.month_id, self.day_id, new_total_spent_today)
 
     def fetch_dayitem_total_spent(self):
-        Database.__init__(self, "database/data/data.db")
-        daily_total_spent = Database.fetch_dayitem_total_spent(self, self.month_id)
+        Database.__init__(self, self.db_file)
+        daily_total_spent = Database.fetch_dayitem_total_spent(self, self.day_id, self.month_id)
 
         return daily_total_spent
 

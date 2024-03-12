@@ -23,6 +23,9 @@ class Window:
     selected_month = curr_month
     selected_year = curr_year
 
+    # Database filename
+    db_file = "database/data/data2.db"
+
     def __init__(self):
         # Window startup size
         window_height = self.window.winfo_screenwidth()

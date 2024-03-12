@@ -11,6 +11,7 @@ class Day(Window, Database):
         self.col = col
         self.look_feel_settings = month_obj.look_feel_settings
         self.pass_top_right_section = pass_top_right_section
+        self.db_file = super().db_file
 
     def display_day(self):
         self.f3_day_frame = Frame(self.frame3, bd=1, relief="solid", padx=0, pady=0)
@@ -44,9 +45,9 @@ class Day(Window, Database):
         print(f"Selected (day click): {Window.selected_day}. {Window.selected_month}, {Window.selected_year}")
 
     # Insert data into DayItem table. Called from top_section.py
-    def insert_dayitem_to_db(self, month_id, item_name, item_price, item_remark):
-        Database.__init__(self, "database/data/data.db")
+    def insert_dayitem_to_db(self, day_id, month_id, item_name, item_price, item_remark):
+        Database.__init__(self, self.db_file)
         self.create_day_table()
-        self.insert_dayitem(month_id, item_name, item_price, item_remark)
+        self.insert_dayitem(day_id, month_id, item_name, item_price, item_remark)
         self.clear_entries()
 

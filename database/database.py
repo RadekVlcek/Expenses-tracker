@@ -16,6 +16,7 @@ class Database:
         try:
             self.cursor.execute("""CREATE TABLE IF NOT EXISTS DayItem (
                     ItemID INTEGER PRIMARY KEY,
+                    DayID INT,
                     MonthID TEXT,
                     ItemName TEXT,
                     ItemPrice INT,
@@ -27,9 +28,9 @@ class Database:
         else:
             self.conn.commit()
 
-    def insert_dayitem(self, month_id, item_name, item_price, remark):
+    def insert_dayitem(self, day_id, month_id, item_name, item_price, remark):
         try:
-            self.cursor.execute("INSERT INTO DayItem VALUES (NULL, ?, ?, ?, ?)", (month_id, item_name, item_price, remark, ))
+            self.cursor.execute("INSERT INTO DayItem VALUES (NULL, ?, ?, ?, ?, ?)", (day_id, month_id, item_name, item_price, remark, ))
         except sqlite3.Error as e:
             print(f"Error (insert_dayitem): {e}")
         else:
@@ -50,7 +51,7 @@ class Database:
     def create_month_table(self):
         try:
             self.cursor.execute("""CREATE TABLE IF NOT EXISTS MonthItem (
-                    MonthID TEXT PRIMARY KEY,
+                    MonthID TEXT,
                     DayID INT,
                     YearID INT,
                     TotalSpentToday INT, 
@@ -80,9 +81,9 @@ class Database:
             self.conn.commit()
             print("Monthitem table: Updated total spent amount inserted: ")
 
-    def fetch_dayitem_total_spent(self, month_id):
+    def fetch_dayitem_total_spent(self, day_id, month_id):
         try:
-            self.cursor.execute("SELECT ItemPrice FROM DayItem WHERE MonthID = ?", (month_id, ))
+            self.cursor.execute("SELECT ItemPrice FROM DayItem WHERE DayID = ? AND MonthID = ?", (day_id, month_id, ))
         except sqlite3.Error as e:
             print(f"Error (fetch_dayitem_total_spent): {e}")
         else:

@@ -37,7 +37,7 @@ class Top_section(Day, Month, Window):
         month_id = Window.selected_month
 
         if self.validate_data(item_name, item_price, item_remark):
-            Day.insert_dayitem_to_db(self, month_id, item_name, item_price, item_remark)
+            Day.insert_dayitem_to_db(self, day_id, month_id, item_name, item_price, item_remark)
             Month.handle_month_input(self, item_price)
 
     def validate_data(self, item_name, item_price, item_remark):
