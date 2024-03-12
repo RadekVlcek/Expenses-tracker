@@ -1,12 +1,14 @@
 from tkinter import *
 import tkinter.ttk as tk
 from tkinter import messagebox
-from window import Window
 from datetime import date
 from functools import partial
 from database.database import Database
+from day import Day
+from month import Month
+from window import Window
 
-class Top_section(Window, Database):
+class Top_section(Day, Month, Window):
     def __init__(self):
         self.window = super().window
         self.look_feel_settings = super().look_feel_settings
@@ -21,6 +23,8 @@ class Top_section(Window, Database):
         Window.selected_day = 1
         self.pass_top_right_section().config(text=f"{Window.selected_day} {Window.selected_month} {Window.selected_year}")
 
+        print(f"Selected (month chosen): {Window.selected_day}. {Window.selected_month}. {Window.selected_year}")
+
     def update_selected_month(self, new_month):
         Window.selected_month = new_month
 
@@ -33,10 +37,8 @@ class Top_section(Window, Database):
         month_id = Window.selected_month
 
         if self.validate_data(item_name, item_price, item_remark):
-            Database.__init__(self, "database/data/data.db")
-            self.create_day_table()
-            self.insert_dayitem(day_id, month_id, item_name, item_price, item_remark)
-            self.clear_entries()
+            Day.insert_dayitem_to_db(self, month_id, item_name, item_price, item_remark)
+            Month.handle_month_input(self, item_price)
 
     def validate_data(self, item_name, item_price, item_remark):
         if item_name != "" and item_price != "" and item_remark != "":

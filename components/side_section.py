@@ -24,9 +24,9 @@ class Side_section(Window, Database):
 
         if data is not None:
             for index, item in enumerate(data):
-                item_name = item[3]
-                item_price = item[4]
-                item_remark = item[5]
+                item_name = item[2]
+                item_price = item[3]
+                item_remark = item[4]
 
                 Label(self.frame4, text=item_name, fg="white", bg=self.look_feel_settings["dark_blue"]).grid(column=0, row=index+1)
                 Label(self.frame4, text=item_price, fg="white", bg=self.look_feel_settings["dark_blue"]).grid(column=1, row=index+1)

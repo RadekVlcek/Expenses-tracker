@@ -11,11 +11,11 @@ class Database:
         else:
             print("Database connected")
 
+    # Day functions
     def create_day_table(self):
         try:
             self.cursor.execute("""CREATE TABLE IF NOT EXISTS DayItem (
-                    ItemID INTEGER PRIMARY KEY, 
-                    DayID INT,
+                    ItemID INTEGER PRIMARY KEY,
                     MonthID TEXT,
                     ItemName TEXT,
                     ItemPrice INT,
@@ -23,29 +23,30 @@ class Database:
                     FOREIGN KEY(MonthID) REFERENCES MonthItem(MonthID)
                 )""")
         except sqlite3.Error as e:
-            print(e)
+            print(f"Error (create_day_table): {e}")
         else:
             self.conn.commit()
-            print("Day table created.")
 
-    def insert_dayitem(self, day_id, month_id, item_name, item_price, remark):
+    def insert_dayitem(self, month_id, item_name, item_price, remark):
         try:
-            self.cursor.execute("INSERT INTO DayItem VALUES (NULL, ?, ?, ?, ?, ?) ", (day_id, month_id, item_name, item_price, remark))
+            self.cursor.execute("INSERT INTO DayItem VALUES (NULL, ?, ?, ?, ?)", (month_id, item_name, item_price, remark, ))
         except sqlite3.Error as e:
-            print(e)
+            print(f"Error (insert_dayitem): {e}")
         else:
             self.conn.commit()
-            print("Data inserted into Day table.")
+            print("DayItem table: Data inserted into Day table.")
 
     def fetch_dayitem_data(self):
         try:
             self.cursor.execute("SELECT * FROM DayItem")
         except sqlite3.Error as e:
-            print(e)
+            print(f"Error (fetch_dayitem_data): {e}")
         else:
             fetched_data = self.cursor.fetchall()
+            print("DayItem table: All daily data fetched.")
             return fetched_data
 
+    # Month functions
     def create_month_table(self):
         try:
             self.cursor.execute("""CREATE TABLE IF NOT EXISTS MonthItem (
@@ -56,7 +57,44 @@ class Database:
                     RemainingBalanceToday INT
                 )""")
         except sqlite3.Error as e:
-            print(e)
+            print(f"Error (create_month_table): {e}")
         else:
             self.conn.commit()
-            print("Month tablet created.")
+            print("MonthItem table: Month tablet created.")
+
+    def insert_monthitem(self, month_id, day_id, year_id, total_spent_today, remaining_balance):
+        try:
+            self.cursor.execute("INSERT INTO MonthItem VALUES (?, ?, ?, ?, ?)", (month_id, day_id, year_id, total_spent_today, remaining_balance, ))
+        except sqlite3.Error as e:
+            print(f"Error (insert_monthitem): {e}")
+        else:
+            self.conn.commit()
+            print("Monthitem table: Data inserted into Month table.")
+
+    def update_monthitem(self, month_id, day_id, new_amount):
+        try:
+            self.cursor.execute("UPDATE MonthItem SET TotalSpentToday = ? WHERE MonthID = ? AND DayID = ?", (new_amount, month_id, day_id, ))
+        except sqlite3.Error as e:
+            print(f"Error (update_monthitem): {e}")
+        else:
+            self.conn.commit()
+            print("Monthitem table: Updated total spent amount inserted: ")
+
+    def fetch_dayitem_total_spent(self, month_id):
+        try:
+            self.cursor.execute("SELECT ItemPrice FROM DayItem WHERE MonthID = ?", (month_id, ))
+        except sqlite3.Error as e:
+            print(f"Error (fetch_dayitem_total_spent): {e}")
+        else:
+            fetched_data = self.cursor.fetchall()
+            print("Dayitem table: Daily total spent data fetched: ", fetched_data)
+            return fetched_data
+
+    def check_if_day_exists(self, month_id, day_id):
+        try:
+            self.cursor.execute("SELECT EXISTS (SELECT 1 FROM MonthItem WHERE MonthID = ? AND DayID = ?)", (month_id, day_id, ))
+        except sqlite3.Error as e:
+            print(f"Error (check_if_day_exists): {e}")
+        else:
+            result = self.cursor.fetchone()[0]
+            return bool(result)

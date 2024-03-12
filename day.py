@@ -1,9 +1,10 @@
 from tkinter import *
 import tkinter.ttk as tk
 from window import Window
+from database.database import Database
 from functools import partial
 
-class Day(Window):
+class Day(Window, Database):
     def __init__(self, month_obj, row, col, pass_top_right_section):
         self.frame3 = month_obj.frame3
         self.row = row
@@ -36,7 +37,16 @@ class Day(Window):
 
     # Trigger clicked day button
     def handle_day_click(self, day_index, event):
-        print(day_index)
         Window.selected_day = day_index
         Window.selected_year = 2024
         self.pass_top_right_section().config(text=f"{Window.selected_day} {Window.selected_month} {Window.selected_year}")
+
+        print(f"Selected (day click): {Window.selected_day}. {Window.selected_month}, {Window.selected_year}")
+
+    # Insert data into DayItem table. Called from top_section.py
+    def insert_dayitem_to_db(self, month_id, item_name, item_price, item_remark):
+        Database.__init__(self, "database/data/data.db")
+        self.create_day_table()
+        self.insert_dayitem(month_id, item_name, item_price, item_remark)
+        self.clear_entries()
+

@@ -14,7 +14,7 @@ class Window:
 
     # Date today
     today = date.today()
-    curr_today = today.strftime("%d")[1]
+    curr_today = today.strftime("%d")
     curr_month = today.strftime("%B")
     curr_year = today.strftime("%Y")
 
