@@ -60,7 +60,7 @@ class Day(Window, Database):
         self.f3_day_frame.bind("<Button-1>", partial(self.handle_day_click, day_index, self.f3_day_frame))
 
         # Day number label - top left corner
-        self.day_label = Label(self.f3_day_frame, text=day_index, font=("Verdana", 20, "italic"), fg="white", bg=self.look_feel_settings[today_button_props[0]], padx=4, pady=2)
+        self.day_label = Label(self.f3_day_frame, text=day_index, font=("Verdana", 22), fg="white", bg=self.look_feel_settings[today_button_props[0]], padx=4, pady=2)
         self.day_label.grid(row=0, column=0, sticky="nw")
         self.day_label.bind("<Button-1>", partial(self.handle_day_click, day_index, self.f3_day_frame))
 
@@ -86,9 +86,7 @@ class Day(Window, Database):
         # Update top right section with selected day, month and year
         Window.selected_day = day_index
         Window.selected_year = 2024
-        self.pass_top_right_section().config(text=f"{Window.selected_day} {Window.selected_month} {Window.selected_year}")
-
-        print(f"Selected (day click): {Window.selected_day}. {Window.selected_month}, {Window.selected_year}")
+        self.pass_top_right_section().config(text=f"{Window.selected_day}. {Window.selected_month} {Window.selected_year}")
 
         # Trigger displaying data for the day clicked
         side_section = Side_section(Window.selected_day, Window.selected_month, Window.selected_year)

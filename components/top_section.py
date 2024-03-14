@@ -64,7 +64,7 @@ class Top_section(Day, Month, Window):
         Window.selected_day_amount_label = label_itself
 
     # Save data to database
-    def save_data(self):
+    def save_data(self, event):
         item_name = self.f2_item_bought_input.get()
         item_price = self.f2_amount_spent_input.get()
         item_remark = self.f2_remark_input.get()
@@ -155,5 +155,8 @@ class Top_section(Day, Month, Window):
         self.f2_remark_input.grid(row=0, column=6, sticky="w")
 
         # Save button
-        f2_save_btn = Button(frame2, text="Save", bg=self.look_feel_settings["dark_blue"], command=self.save_data)
-        f2_save_btn.grid(row=0, column=7)
+        f = Frame(frame2, bg=self.look_feel_settings["lighter_blue"])
+        f.grid(row=0, column=7)
+        f2_save_btn = Label(f, text="Save", width=5, height=1, bg=self.look_feel_settings["lighter_blue"])
+        f2_save_btn.grid(row=0, column=0, sticky="nswe")
+        f2_save_btn.bind("<Button-1>", self.save_data)

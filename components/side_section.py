@@ -15,13 +15,13 @@ class Side_section(Window, Database):
         
         self.db_file = super().db_file
 
-    def fetch_data(self):
+    def fetch_frame4_data(self):
         Database.__init__(self, self.db_file)
         data = Database.fetch_dayitem_data(self, self.selected_day, self.selected_month)
         return data
 
     def display_data_in_frame4(self):
-        data = self.fetch_data()
+        data = self.fetch_frame4_data()
 
         if data is not None:
             for index, item in enumerate(data):
@@ -36,7 +36,6 @@ class Side_section(Window, Database):
             Label(self.frame4, text="No spendings logged", fg="white", bg=self.look_feel_settings["dark_blue"]).grid(column=1, row=2)
 
     # Initiate everything inside Frame 7
-    # SET BG TO: background=self.look_feel_settings["dark_blue"] !!!
     def initiate_frame7(self):
         self.frame7 = Frame(self.window, bd=0, background=self.look_feel_settings["dark_blue"])
         self.frame7.columnconfigure((0, 1, 2), weight=1)
