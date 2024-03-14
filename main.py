@@ -21,8 +21,10 @@ top_right_section_obj.display_frame8()
 # Store pair of each "month name" with each "month object"
 months_objects = {}
 
+# Currently selected "amount_spent" label
 selected_day_amount_label = None
 
+# List for first day's "amount_spent" labels
 list_first_day_amount_labels = []
 
 for month, days_count in window_obj.months.items():
@@ -56,8 +58,6 @@ for month, days_count in window_obj.months.items():
                 break
             else:
                 day_index += 1
-
-window_obj.selected_day_amount_label = selected_day_amount_label
 
 # Raise current month frame on startup
 months_objects[window_obj.curr_month].frame3.tkraise()

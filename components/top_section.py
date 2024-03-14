@@ -11,7 +11,7 @@ from window import Window
 
 class Top_section(Day, Month, Window):
 
-    months = {
+    month_indices = {
        "January": 0,
        "February": 1,
        "March": 2,
@@ -51,15 +51,17 @@ class Top_section(Day, Month, Window):
         Window.selected_month = new_month
     
     def pass_selected_day_amount_label(self, pass_selected_day_amount_label):
-        self.pass_selected_day_amount_label = pass_selected_day_amount_label
+        #self.pass_selected_day_amount_label = pass_selected_day_amount_label
+        Window.selected_day_amount_label = pass_selected_day_amount_label
 
     def pass_list_first_day_amount_labels(self, list_first_day_amount_labels):
         self.list_first_day_amount_labels = list_first_day_amount_labels
 
     def apply_selected_day_amount_label(self, selected_month):
-        number = self.months[selected_month]
+        number = self.month_indices[selected_month]
         label_itself = self.list_first_day_amount_labels[number]
-        self.pass_selected_day_amount_label = label_itself
+        #self.pass_selected_day_amount_label = label_itself
+        Window.selected_day_amount_label = label_itself
 
     # Save data to database
     def save_data(self):
@@ -81,7 +83,8 @@ class Top_section(Day, Month, Window):
 
             # Trigger displaying updated data for each Day element
             result = Day.fetch_monthitem_total_daily_spent(self, day_id, month_id)
-            self.pass_selected_day_amount_label.config(text=result)
+            #self.pass_selected_day_amount_label.config(text=result)
+            Window.selected_day_amount_label.config(text=result)
 
     def update_side_section_data(self):
         side_section = Side_section(Window.selected_day, Window.selected_month, Window.selected_year)

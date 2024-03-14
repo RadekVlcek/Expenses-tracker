@@ -30,7 +30,7 @@ class Window:
     selected_day_amount_label = None
 
     # Database filename
-    db_file = "database/data/data2.db"
+    db_file = "database/data/data.db"
 
     def __init__(self):
         # Window startup size
