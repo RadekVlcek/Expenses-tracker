@@ -37,9 +37,9 @@ class Database:
             self.conn.commit()
             print("DayItem table: Data inserted into Day table.")
 
-    def fetch_dayitem_data(self):
+    def fetch_dayitem_data(self, day_id, month_id):
         try:
-            self.cursor.execute("SELECT * FROM DayItem")
+            self.cursor.execute("SELECT * FROM DayItem WHERE DayID = ? AND MonthID = ?", (day_id, month_id))
         except sqlite3.Error as e:
             print(f"Error (fetch_dayitem_data): {e}")
         else:

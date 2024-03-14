@@ -4,6 +4,7 @@ from tkinter import messagebox
 from datetime import date
 from functools import partial
 from database.database import Database
+from components.side_section import Side_section
 from day import Day
 from month import Month
 from window import Window
@@ -25,6 +26,11 @@ class Top_section(Day, Month, Window):
 
         print(f"Selected (month chosen): {Window.selected_day}. {Window.selected_month}. {Window.selected_year}")
 
+        # Trigger displaying data for the day clicked
+        side_section = Side_section(Window.selected_day, Window.selected_month, Window.selected_year)
+        side_section.init_and_display_all()
+        side_section.display_data_in_frame4()
+
     def update_selected_month(self, new_month):
         Window.selected_month = new_month
 
@@ -39,6 +45,11 @@ class Top_section(Day, Month, Window):
         if self.validate_data(item_name, item_price, item_remark):
             Day.insert_dayitem_to_db(self, day_id, month_id, item_name, item_price, item_remark)
             Month.handle_month_input(self, item_price)
+            
+            # Trigger displaying data for the day clicked
+            side_section = Side_section(Window.selected_day, Window.selected_month, Window.selected_year)
+            side_section.init_and_display_all()
+            side_section.display_data_in_frame4()
 
     def validate_data(self, item_name, item_price, item_remark):
         if item_name != "" and item_price != "" and item_remark != "":

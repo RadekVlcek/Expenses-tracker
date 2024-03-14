@@ -53,10 +53,9 @@ month_obj.init_month_db(window_obj.curr_month, window_obj.selected_month)
 # Display Top section
 top_section_obj.display_frame2(window_obj.months.keys(), months_objects, top_right_section_obj.pass_top_right_section)
 
-# Display Side section
-side_section_obj.display_frame7()
-
-side_section_obj.display_data()
+# Display Side section & data
+side_section_obj.init_and_display_all()
+side_section_obj.display_data_in_frame4()
 
 # Display Bottom section
 bottom_section_obj.display_frame9()

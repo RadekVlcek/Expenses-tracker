@@ -2,6 +2,7 @@ from tkinter import *
 import tkinter.ttk as tk
 from window import Window
 from database.database import Database
+from components.side_section import Side_section
 from functools import partial
 
 class Day(Window, Database):
@@ -11,14 +12,11 @@ class Day(Window, Database):
         self.col = col
         self.look_feel_settings = month_obj.look_feel_settings
         self.pass_top_right_section = pass_top_right_section
-        self.db_file = super().db_file
+        self.db_file = Window.db_file
 
     def display_day(self):
         self.f3_day_frame = Frame(self.frame3, bd=1, relief="solid", padx=0, pady=0)
         self.f3_day_frame.grid(row=self.row, column=self.col)
-
-    def get_day_color(self, day_index):
-        pass
 
     def populate_day_props(self, day_index):
         self.f3_day_frame.config(bg=self.look_feel_settings["lighter_blue"])
@@ -38,13 +36,19 @@ class Day(Window, Database):
 
     # Trigger clicked day button
     def handle_day_click(self, day_index, event):
+        # Update top right section with selected day, month and year
         Window.selected_day = day_index
         Window.selected_year = 2024
         self.pass_top_right_section().config(text=f"{Window.selected_day} {Window.selected_month} {Window.selected_year}")
 
         print(f"Selected (day click): {Window.selected_day}. {Window.selected_month}, {Window.selected_year}")
 
-    # Insert data into DayItem table. Called from top_section.py
+        # Trigger displaying data for the day clicked
+        side_section = Side_section(Window.selected_day, Window.selected_month, Window.selected_year)
+        side_section.init_and_display_all()
+        side_section.display_data_in_frame4()
+
+    # Insert data into DayItem table. Called from database.py
     def insert_dayitem_to_db(self, day_id, month_id, item_name, item_price, item_remark):
         Database.__init__(self, self.db_file)
         self.create_day_table()
