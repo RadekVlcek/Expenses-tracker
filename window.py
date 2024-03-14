@@ -9,7 +9,7 @@ class Window:
         "dark_blue": "#0a1829",
         "light_blue": "#0f243e",
         "lighter_blue": "#143052",
-        "day_today": "#1a3a5e",
+        "day_today": "#1e487b",
         "button_hover_enter": "#193c67",
     }
 
