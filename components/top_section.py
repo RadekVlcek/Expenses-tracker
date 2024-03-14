@@ -126,14 +126,16 @@ class Top_section(Day, Month, Window):
         frame2.rowconfigure(0, weight=1)
 
         # Frame 1 (month) section
-        frame1 = Frame(frame2)
+        frame1 = Frame(frame2, bg=self.look_feel_settings["dark_blue"])
         frame1.grid(row=0, column=0, padx=(25, 50), sticky="w")
         f1_months_dropdown = OptionMenu(frame1, self.selected_month_str, *months, command=self.raise_selected_month)
-        f1_months_dropdown.grid(row=0, column=0, padx=(0, 5))
+        f1_months_dropdown.config(bg=self.look_feel_settings["dark_blue"])
+        f1_months_dropdown.grid(row=0, column=0, padx=(0, 5), sticky="nswe")
 
         # Year section
         year_text = StringVar(frame1, "2024")
         year_dropdown = OptionMenu(frame1, year_text, "2024")
+        year_dropdown.config(bg=self.look_feel_settings["dark_blue"])
         year_dropdown.grid(row=0, column=1)
 
         # Item bought section
@@ -157,6 +159,6 @@ class Top_section(Day, Month, Window):
         # Save button
         f = Frame(frame2, bg=self.look_feel_settings["lighter_blue"])
         f.grid(row=0, column=7)
-        f2_save_btn = Label(f, text="Save", width=5, height=1, bg=self.look_feel_settings["lighter_blue"])
+        f2_save_btn = Label(f, text="Save", width=5, height=2, bg=self.look_feel_settings["lighter_blue"])
         f2_save_btn.grid(row=0, column=0, sticky="nswe")
         f2_save_btn.bind("<Button-1>", self.save_data)
