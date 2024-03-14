@@ -90,6 +90,15 @@ class Database:
             fetched_data = self.cursor.fetchall()
             return fetched_data
 
+    def fetch_monthitem_total_daily_spent(self, day_id, month_id):
+        try:
+            self.cursor.execute("SELECT TotalSpentToday FROM MonthItem WHERE DayID = ? AND MonthID = ?", (day_id, month_id, ))
+        except sqlite3.Error as e:
+            print(f"DB: Error (fetch_monthitem_total_daily_spent): {e}")
+        else:
+            fetched_data = self.cursor.fetchall()
+            return fetched_data
+
     def check_if_day_exists(self, month_id, day_id):
         try:
             self.cursor.execute("SELECT EXISTS (SELECT 1 FROM MonthItem WHERE MonthID = ? AND DayID = ?)", (month_id, day_id, ))
@@ -105,4 +114,4 @@ class Database:
         except sqlite3.Error as e:
             print(e)
         else:
-            print("DB: Database closed.")
+            print("DB: Database closed. \n")

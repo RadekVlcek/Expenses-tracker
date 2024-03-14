@@ -41,11 +41,16 @@ class Top_section(Day, Month, Window):
         month_id = Window.selected_month
 
         if self.validate_data(item_name, item_price, item_remark):
+            # Update DayItem database
             Day.insert_dayitem_to_db(self, day_id, month_id, item_name, item_price, item_remark)
+
+            # Update MonthItem database
             Month.handle_month_input(self, item_price)
 
-            # Trigger displaying data for the day clicked
+            # Trigger displaying updated data in Side_section
             self.update_side_section_data()
+
+            # Trigger displaying updated data for each Day element
 
     def update_side_section_data(self):
         side_section = Side_section(Window.selected_day, Window.selected_month, Window.selected_year)

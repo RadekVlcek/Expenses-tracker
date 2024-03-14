@@ -38,7 +38,7 @@ for month, days_count in window_obj.months.items():
         for col in range(7):
             day_obj = Day(month_obj, row, col, top_right_section_obj.pass_top_right_section)
             day_obj.display_day()
-            day_obj.populate_day_props(day_index)
+            day_obj.populate_day_props(day_index, month)
 
             if day_index >= month_obj.days_count:
                 break
