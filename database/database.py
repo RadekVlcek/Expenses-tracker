@@ -107,7 +107,7 @@ class Database:
         else:
             result = self.cursor.fetchone()[0]
             return bool(result)
-
+"""
     def __del__(self):
         try:
             self.conn.close()
@@ -115,3 +115,5 @@ class Database:
             print(e)
         else:
             print("DB: Database closed. \n")
+
+            """

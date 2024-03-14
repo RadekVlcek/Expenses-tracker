@@ -5,6 +5,8 @@ from datetime import date
 class Window:
     # Initialize Tk main window
     window = Tk()
+
+    # Colors
     look_feel_settings = {
         "dark_blue": "#0a1829",
         "light_blue": "#0f243e",
@@ -18,11 +20,14 @@ class Window:
     curr_today = today.strftime("%d")
     curr_month = today.strftime("%B")
     curr_year = today.strftime("%Y")
-
-    # Initially selected day, month and year
+    
+    # Initially/currently selected day, month and year based on today's date
     selected_day = curr_today
     selected_month = curr_month
     selected_year = curr_year
+
+    # Initially/currently selected "amount_spent" label in Day class
+    selected_day_amount_label = None
 
     # Database filename
     db_file = "database/data/data2.db"

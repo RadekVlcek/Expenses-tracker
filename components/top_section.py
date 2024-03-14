@@ -10,6 +10,22 @@ from month import Month
 from window import Window
 
 class Top_section(Day, Month, Window):
+
+    months = {
+       "January": 0,
+       "February": 1,
+       "March": 2,
+       "April": 3,
+       "May": 4,
+       "June": 5,
+       "July": 6,
+       "August": 7,
+       "September": 8,
+       "October": 9,
+        "November": 10,
+        "December": 11
+    }
+
     def __init__(self):
         self.window = super().window
         self.look_feel_settings = super().look_feel_settings
@@ -29,8 +45,21 @@ class Top_section(Day, Month, Window):
         # Trigger displaying data for the day clicked
         self.update_side_section_data()
 
+        self.apply_selected_day_amount_label(selected_month)
+
     def update_selected_month(self, new_month):
         Window.selected_month = new_month
+    
+    def pass_selected_day_amount_label(self, pass_selected_day_amount_label):
+        self.pass_selected_day_amount_label = pass_selected_day_amount_label
+
+    def pass_list_first_day_amount_labels(self, list_first_day_amount_labels):
+        self.list_first_day_amount_labels = list_first_day_amount_labels
+
+    def apply_selected_day_amount_label(self, selected_month):
+        number = self.months[selected_month]
+        label_itself = self.list_first_day_amount_labels[number]
+        self.pass_selected_day_amount_label = label_itself
 
     # Save data to database
     def save_data(self):
@@ -51,6 +80,8 @@ class Top_section(Day, Month, Window):
             self.update_side_section_data()
 
             # Trigger displaying updated data for each Day element
+            result = Day.fetch_monthitem_total_daily_spent(self, day_id, month_id)
+            self.pass_selected_day_amount_label.config(text=result)
 
     def update_side_section_data(self):
         side_section = Side_section(Window.selected_day, Window.selected_month, Window.selected_year)
@@ -58,7 +89,7 @@ class Top_section(Day, Month, Window):
         side_section.display_data_in_frame4()
 
     def validate_data(self, item_name, item_price, item_remark):
-        if item_name != "" and item_price != "" and item_remark != "":
+        if item_name != "" and item_price != "":
             if item_price.isdigit():
                 if not item_name.isdigit():
                     if not item_remark.isdigit():
@@ -103,19 +134,19 @@ class Top_section(Day, Month, Window):
         year_dropdown.grid(row=0, column=1)
 
         # Item bought section
-        f2_item_bought_label = Label(frame2, text="Item bought", fg="white", bg=self.look_feel_settings["dark_blue"])
+        f2_item_bought_label = Label(frame2, text="Item name:", fg="white", bg=self.look_feel_settings["dark_blue"])
         f2_item_bought_label.grid(row=0, column=1, sticky="e")
         self.f2_item_bought_input = Entry(frame2, fg="white",  highlightbackground=self.look_feel_settings["dark_blue"], bg=self.look_feel_settings["lighter_blue"])
         self.f2_item_bought_input.grid(row=0, column=2, sticky="w")
 
         # Amount spent section
-        f2_amount_spent_label = Label(frame2, text="Amount spent", fg="white", bg=self.look_feel_settings["dark_blue"])
+        f2_amount_spent_label = Label(frame2, text="Item price (€):", fg="white", bg=self.look_feel_settings["dark_blue"])
         f2_amount_spent_label.grid(row=0, column=3, sticky="e")
         self.f2_amount_spent_input = Entry(frame2, fg="white",  highlightbackground=self.look_feel_settings["dark_blue"], bg=self.look_feel_settings["lighter_blue"], width=10)
         self.f2_amount_spent_input.grid(row=0, column=4, sticky="w")
 
         # Remark section
-        f2_remark_label = Label(frame2, text="Remark", fg="white", bg=self.look_feel_settings["dark_blue"])
+        f2_remark_label = Label(frame2, text="Remark:", fg="white", bg=self.look_feel_settings["dark_blue"])
         f2_remark_label.grid(row=0, column=5, sticky="e")
         self.f2_remark_input = Entry(frame2, fg="white",  highlightbackground=self.look_feel_settings["dark_blue"], bg=self.look_feel_settings["lighter_blue"])
         self.f2_remark_input.grid(row=0, column=6, sticky="w")

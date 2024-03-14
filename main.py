@@ -20,7 +20,10 @@ top_right_section_obj.display_frame8()
 # Display months and days
 # Store pair of each "month name" with each "month object"
 months_objects = {}
-days_objects = {}
+
+selected_day_amount_label = None
+
+list_first_day_amount_labels = []
 
 for month, days_count in window_obj.months.items():
     # Create separate m object for each month
@@ -36,19 +39,36 @@ for month, days_count in window_obj.months.items():
     day_index = 1
     for row in range(5):
         for col in range(7):
-            day_obj = Day(month_obj, row, col, top_right_section_obj.pass_top_right_section)
-            day_obj.display_day()
+            day_obj = Day(month_obj, top_right_section_obj.pass_top_right_section)
+            day_obj.display_day(row, col)
             day_obj.populate_day_props(day_index, month)
+            
+            # Collect iitially selected "amount_spent" label inside of Day element
+            temp = day_obj.return_current_day_amount_label(day_index, month)
+            if temp is not None:
+                selected_day_amount_label = temp
+
+            # Collect only every month's first day's "amount_spent" labels inside of Day elements
+            if day_index == 1:
+                list_first_day_amount_labels.append(day_obj.return_first_day_amount_label())
 
             if day_index >= month_obj.days_count:
                 break
             else:
                 day_index += 1
 
+window_obj.selected_day_amount_label = selected_day_amount_label
+
 # Raise current month frame on startup
 months_objects[window_obj.curr_month].frame3.tkraise()
 
 month_obj.init_month_db(window_obj.curr_month, window_obj.selected_month)
+
+# Pass currently selected selected_day_amount_label to Top_section
+top_section_obj.pass_selected_day_amount_label(selected_day_amount_label)
+
+# Pass list of collected "amount_spent" labels for only first days of each month
+top_section_obj.pass_list_first_day_amount_labels(list_first_day_amount_labels)
 
 # Display Top section
 top_section_obj.display_frame2(window_obj.months.keys(), months_objects, top_right_section_obj.pass_top_right_section)
