@@ -11,10 +11,10 @@ class Month(Window, Database):
         self.db_file = super().db_file
 
     def display_month(self):
-        self.frame3 = Frame(self.window, bd=1, bg=self.look_feel_settings["light_blue"], relief="solid")
-        self.frame3.grid(column=0, row=1, sticky="nswe")
-        self.frame3.columnconfigure((0, 1, 2, 3, 4, 5, 6), weight=1)
-        self.frame3.rowconfigure((0, 1, 2, 3, 4), weight=1)
+        self.frame3 = Frame(self.window, bd=0, bg=self.look_feel_settings["dark_blue"], relief="solid", padx=0, pady=0)
+        self.frame3.grid(column=0, row=1, sticky="")
+        self.frame3.columnconfigure((0, 1, 2, 3, 4, 5, 6), weight=0)
+        self.frame3.rowconfigure((0, 1, 2, 3, 4), weight=0)
 
     def init_month_db(self, curr_month, selected_month):
         if curr_month == selected_month:

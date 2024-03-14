@@ -18,8 +18,8 @@ class Day(Window, Database):
         self.selected_day_frame_label = None
 
     def display_day(self, row, col):
-        self.f3_day_frame = Frame(self.frame3, bd=1, relief="solid", padx=0, pady=0)
-        self.f3_day_frame.grid(row=row, column=col)
+        self.f3_day_frame = Frame(self.frame3, bd=1, relief="solid")
+        self.f3_day_frame.grid(row=row, column=col, padx=7, pady=7)
 
     def fetch_monthitem_total_daily_spent(self, day_id, month_id):
         Database.__init__(self, self.db_file)
@@ -60,7 +60,7 @@ class Day(Window, Database):
         self.f3_day_frame.bind("<Button-1>", partial(self.handle_day_click, day_index, self.f3_day_frame))
 
         # Day number label - top left corner
-        self.day_label = Label(self.f3_day_frame, text=day_index, font=("Verdana", 22), fg="white", bg=self.look_feel_settings[today_button_props[0]], padx=4, pady=2)
+        self.day_label = Label(self.f3_day_frame, text=day_index, font=("Verdana", 24), fg="white", bg=self.look_feel_settings[today_button_props[0]], padx=4, pady=2)
         self.day_label.grid(row=0, column=0, sticky="nw")
         self.day_label.bind("<Button-1>", partial(self.handle_day_click, day_index, self.f3_day_frame))
 
@@ -88,10 +88,16 @@ class Day(Window, Database):
         Window.selected_year = 2024
         self.pass_top_right_section().config(text=f"{Window.selected_day}. {Window.selected_month} {Window.selected_year}")
 
-        # Trigger displaying data for the day clicked
+        # Initiate Side_section object and reload the section
         side_section = Side_section(Window.selected_day, Window.selected_month, Window.selected_year)
         side_section.init_and_display_all()
-        side_section.display_data_in_frame4()
+
+        # Trigger displaying data in frame4 for day clicked
+        side_section.display_frame4_data()
+
+        # Trigger displaying data in frame5 for day clicked
+        #self.fetch_monthitem_total_daily_spent()
+        #side_section.display_frame5_data()
 
         # Pass currently selected Day element to Window class
         self.pass_selected_day_amount_label()

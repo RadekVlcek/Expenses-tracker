@@ -9,7 +9,7 @@ class Bottom_section(Window):
         self.look_feel_settings = super().look_feel_settings
 
     def display_frame9(self):
-        frame9 = Frame(self.window, bg=self.look_feel_settings["dark_blue"])
+        frame9 = Frame(self.window, bg=self.look_feel_settings["dark_blue"], highlightthickness=1, highlightbackground="red")
         frame9.grid(row=2, column=0, sticky="nswe")
 
         frame9.columnconfigure((0, 1, 2, 3, 4, 5), weight=2)

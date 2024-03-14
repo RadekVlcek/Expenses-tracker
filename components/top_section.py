@@ -38,7 +38,7 @@ class Top_section(Day, Month, Window):
 
         # Pass currently selected month to Window class
         Window.selected_day = 1
-        self.pass_top_right_section().config(text=f"{Window.selected_day} {Window.selected_month} {Window.selected_year}")
+        self.pass_top_right_section().config(text=f"{Window.selected_day}. {Window.selected_month} {Window.selected_year}")
 
         print(f"Selected (month chosen): {Window.selected_day}. {Window.selected_month}. {Window.selected_year}")
 
@@ -89,16 +89,13 @@ class Top_section(Day, Month, Window):
     def update_side_section_data(self):
         side_section = Side_section(Window.selected_day, Window.selected_month, Window.selected_year)
         side_section.init_and_display_all()
-        side_section.display_data_in_frame4()
+        side_section.display_frame4_data()
 
     def validate_data(self, item_name, item_price, item_remark):
         if item_name != "" and item_price != "":
             if item_price.isdigit():
                 if not item_name.isdigit():
-                    if not item_remark.isdigit():
-                        return True
-                    else:
-                        messagebox.showinfo(self.window, message="Remark must be a text.")
+                    return True
                 else:
                     messagebox.showinfo(self.window, message="Item bought must be a text.")
             else:
@@ -120,7 +117,7 @@ class Top_section(Day, Month, Window):
         self.selected_month_str = StringVar(self.window, Window.curr_month)
 
         # Frame 2 - for Frame 1, Item bought, Amount spent and Remark
-        frame2 = Frame(self.window, bg=self.look_feel_settings["dark_blue"])
+        frame2 = Frame(self.window, bg=self.look_feel_settings["dark_blue"], highlightthickness=1, highlightbackground="red")
         frame2.grid(row=0, column=0, pady=(15, 10), sticky="nswe")
         frame2.columnconfigure((1, 2, 3, 4, 5, 6, 7, 8), weight=1)
         frame2.rowconfigure(0, weight=1)
@@ -129,13 +126,13 @@ class Top_section(Day, Month, Window):
         frame1 = Frame(frame2, bg=self.look_feel_settings["dark_blue"])
         frame1.grid(row=0, column=0, padx=(25, 50), sticky="w")
         f1_months_dropdown = OptionMenu(frame1, self.selected_month_str, *months, command=self.raise_selected_month)
-        f1_months_dropdown.config(bg=self.look_feel_settings["dark_blue"])
+        f1_months_dropdown.config(bg=self.look_feel_settings["dark_blue"], fg="white")
         f1_months_dropdown.grid(row=0, column=0, padx=(0, 5), sticky="nswe")
 
         # Year section
         year_text = StringVar(frame1, "2024")
         year_dropdown = OptionMenu(frame1, year_text, "2024")
-        year_dropdown.config(bg=self.look_feel_settings["dark_blue"])
+        year_dropdown.config(bg=self.look_feel_settings["dark_blue"], fg="white")
         year_dropdown.grid(row=0, column=1)
 
         # Item bought section

@@ -75,7 +75,8 @@ top_section_obj.display_frame2(window_obj.months.keys(), months_objects, top_rig
 
 # Display Side section & data
 side_section_obj.init_and_display_all()
-side_section_obj.display_data_in_frame4()
+side_section_obj.display_frame4_data()
+#side_section_obj.display_frame5_data(window_obj.curr_today, window_obj.curr_month)
 
 # Display Bottom section
 bottom_section_obj.display_frame9()

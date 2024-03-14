@@ -20,7 +20,7 @@ class Side_section(Window, Database):
         data = Database.fetch_dayitem_data(self, self.selected_day, self.selected_month)
         return data
 
-    def display_data_in_frame4(self):
+    def display_frame4_data(self):
         data = self.fetch_frame4_data()
 
         if data is not None:
@@ -35,9 +35,12 @@ class Side_section(Window, Database):
         else:
             Label(self.frame4, text="No spendings logged", fg="white", bg=self.look_feel_settings["dark_blue"]).grid(column=1, row=2)
 
+    def display_frame5_data(self, daily_total_spent):
+        print(daily_total_spent)
+
     # Initiate everything inside Frame 7
     def initiate_frame7(self):
-        self.frame7 = Frame(self.window, bd=0, background=self.look_feel_settings["dark_blue"])
+        self.frame7 = Frame(self.window, background=self.look_feel_settings["dark_blue"], highlightthickness=1, highlightbackground="red")
         self.frame7.columnconfigure((0, 1, 2), weight=1)
         self.frame7.rowconfigure((0, 1, 2), weight=3)
 
