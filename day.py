@@ -59,7 +59,7 @@ class Day(Window, Database):
         self.f3_day_frame.bind("<Button-1>", partial(self.handle_day_click, day_index, self.f3_day_frame))
 
         # Day number label - top left corner
-        self.day_label = Label(self.f3_day_frame, text=day_index, font=("Verdana", 24), fg="white", bg=self.look_feel_settings["lighter_blue"], padx=4, pady=2)
+        self.day_label = Label(self.f3_day_frame, text=day_index, font=("Verdana", 23, "bold"), fg="white", bg=self.look_feel_settings["lighter_blue"], padx=3, pady=0)
         self.day_label.grid(row=0, column=0, sticky="nw")
         self.day_label.bind("<Button-1>", partial(self.handle_day_click, day_index, self.f3_day_frame))
 

@@ -107,6 +107,31 @@ class Database:
         else:
             result = self.cursor.fetchone()[0]
             return bool(result)
+
+    def fetch_monthitem_total_monthly_spent(self, month_id):
+        try:
+            self.cursor.execute("SELECT TotalSpentToday FROM MonthItem WHERE MonthID = ?", (month_id, ))
+        except sqlite3.Error as e:
+            print(f"DB: Error (fetch_monthitem_total_monthly_spent): {e}")
+        else:
+            fetched_data = self.cursor.fetchall()
+            return fetched_data
+
+    # Year functions
+    def create_year_table(self):
+        try:
+            self.cursor.execute("""CREATE TABLE IF NOT EXISTS YearItem (
+                    MonthID TEXT,
+                    YearID INT,
+                    TotalSpentThisMonth INT,
+                    RemainingBalanceThisMonth INT,
+                    FOREIGN KEY(MonthID) REFERENCES MonthItem(MonthID)
+                )""")
+        except sqlite3.Error as e:
+            print(f"DB: Error (create_year_table): {e}")
+        else:
+            self.conn.commit()
+
 """
     def __del__(self):
         try:
@@ -116,4 +141,4 @@ class Database:
         else:
             print("DB: Database closed. \n")
 
-            """
+ """

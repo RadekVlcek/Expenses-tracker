@@ -75,12 +75,14 @@ class Top_section(Day, Month, Window):
             # Update MonthItem database
             Month.handle_month_input(self, item_price)
 
+            # Update Bottom_section monthly total_spent label
+            Month.fetch_bottom_section_monthly_spent(self, month_id)
+
             # Trigger displaying updated data in Side_section
             self.update_side_section_data()
 
             # Trigger displaying updated data for each Day element
             result = Day.fetch_monthitem_total_daily_spent(self, day_id, month_id)
-            #self.pass_selected_day_amount_label.config(text=result)
             Window.selected_day_amount_label.config(text=result)
 
     def update_side_section_data(self):

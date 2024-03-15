@@ -61,3 +61,13 @@ class Month(Window, Database):
             result += item[0]
             
         return result
+
+    def fetch_bottom_section_monthly_spent(self, month_id):
+        Database.__init__(self, self.db_file)
+        data = Database.fetch_monthitem_total_monthly_spent(self, month_id)
+        
+        total_monthly_spent = 0
+        for item in data:
+            total_monthly_spent += int(item[0])
+
+        return total_monthly_spent
