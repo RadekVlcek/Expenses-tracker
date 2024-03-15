@@ -96,7 +96,7 @@ class Day(Window, Database):
         side_section.display_frame4_data()
 
         # Trigger displaying data in frame5 for day clicked
-        side_section.display_frame5_data(self.daily_total_spent)
+        side_section.display_frame5_data()
 
         # Pass currently selected Day element to Window class
         self.pass_selected_day_amount_label()

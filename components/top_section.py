@@ -40,8 +40,6 @@ class Top_section(Day, Month, Window):
         Window.selected_day = 1
         self.pass_top_right_section().config(text=f"{Window.selected_day}. {Window.selected_month} {Window.selected_year}")
 
-        print(f"Selected (month chosen): {Window.selected_day}. {Window.selected_month}. {Window.selected_year}")
-
         # Trigger displaying data for the day clicked
         self.update_side_section_data()
 
@@ -60,7 +58,6 @@ class Top_section(Day, Month, Window):
     def apply_selected_day_amount_label(self, selected_month):
         number = self.month_indices[selected_month]
         label_itself = self.list_first_day_amount_labels[number]
-        #self.pass_selected_day_amount_label = label_itself
         Window.selected_day_amount_label = label_itself
 
     # Save data to database
@@ -90,6 +87,7 @@ class Top_section(Day, Month, Window):
         side_section = Side_section(Window.selected_day, Window.selected_month, Window.selected_year)
         side_section.init_and_display_all()
         side_section.display_frame4_data()
+        side_section.display_frame5_data()
 
     def validate_data(self, item_name, item_price, item_remark):
         if item_name != "" and item_price != "":
