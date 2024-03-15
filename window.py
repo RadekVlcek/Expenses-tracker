@@ -35,6 +35,22 @@ class Window:
     # Database filename
     db_file = "database/data/data.db"
 
+
+    months = {
+        "January": 31,
+        "February": 29,
+        "March": 31,
+        "April": 30,
+        "May": 31,
+        "June": 30,
+        "July": 31,
+        "August": 31,
+        "September": 30,
+        "October": 31,
+        "November": 30,
+        "December": 31
+    }
+
     def __init__(self):
         # Window startup size
         window_height = self.window.winfo_screenwidth()
@@ -54,20 +70,7 @@ class Window:
         self.window.rowconfigure(1, weight=1)
         self.window.rowconfigure(2, weight=1)
 
-        self.months = {
-            "January": 31,
-            "February": 29,
-            "March": 31,
-            "April": 30,
-            "May": 31,
-            "June": 30,
-            "July": 31,
-            "August": 31,
-            "September": 30,
-            "October": 31,
-            "November": 30,
-            "December": 31
-        }
+
 
     def display_window(self):
         self.window.mainloop()

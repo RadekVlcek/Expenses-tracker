@@ -13,14 +13,14 @@ class Bottom_section(Window):
         self.frame9.columnconfigure((0, 1, 2, 3, 4, 5), weight=2)
         self.frame9.rowconfigure(0, weight=1)
 
-        self.f5_rem_balance_label = Label(self.frame9, text="Remaining balance", fg="white", bg=self.look_feel_settings["dark_blue"])
-        self.f5_rem_balance_value = Label(self.frame9, text="TEST", fg="white", bg=self.look_feel_settings["dark_blue"]) # to be configured
+        self.f5_rem_balance_label = Label(self.frame9, text="Remaining balance ", fg="white", bg=self.look_feel_settings["dark_blue"])
+        self.f5_rem_balance_value = Label(self.frame9, text="", fg="white", bg=self.look_feel_settings["dark_blue"], font=("Verdana", 24))
 
-        self.f5_total_spent_label = Label(self.frame9, text="Total spent", fg="white", bg=self.look_feel_settings["dark_blue"])
-        self.f5_total_spent_value = Label(self.frame9, text="TEST", fg="white", bg=self.look_feel_settings["dark_blue"]) # to be configured
+        self.f5_total_spent_label = Label(self.frame9, text="Total spent ", fg="white", bg=self.look_feel_settings["dark_blue"])
+        self.f5_total_spent_value = Label(self.frame9, text="", fg="white", bg=self.look_feel_settings["dark_blue"], font=("Verdana", 24))
 
-        self.f5_smtg_else_label = Label(self.frame9, text="Something else", fg="white", bg=self.look_feel_settings["dark_blue"])
-        self.f5_smtg_else_value = Label(self.frame9, text="TEST", fg="white", bg=self.look_feel_settings["dark_blue"]) # to be configured
+        self.f5_smtg_else_label = Label(self.frame9, text="Something else ", fg="white", bg=self.look_feel_settings["dark_blue"])
+        self.f5_smtg_else_value = Label(self.frame9, text="", fg="white", bg=self.look_feel_settings["dark_blue"], font=("Verdana", 24))
 
     def display_frame9(self):
         self.frame9.grid(row=2, column=0, sticky="nswe")
@@ -35,7 +35,7 @@ class Bottom_section(Window):
         self.f5_smtg_else_value.grid(row=0, column=5, sticky="w")
 
     def update_total_spent(self, new_total_spent):
-        self.f5_total_spent_value.config(text=new_total_spent)
+        self.f5_total_spent_value.config(text=f"€{new_total_spent}")
 
     def pass_total_spent_this_month(self, new_total_spent):
-        self.f5_total_spent_value.config(text=new_total_spent)
+        self.f5_total_spent_value.config(text=f"€{new_total_spent}")

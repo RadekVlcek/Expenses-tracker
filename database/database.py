@@ -117,6 +117,15 @@ class Database:
             fetched_data = self.cursor.fetchall()
             return fetched_data
 
+    def fetch_monthitem_for_graph(self, month_id):
+        try:
+            self.cursor.execute("SELECT DayID, TotalSpentToday FROM MonthItem WHERE MonthID = ?", (month_id, ))
+        except sqlite3.Error as e:
+            print(f"DB: Error (fetch_monthitem_for_graph): {e}")
+        else:
+            fetched_data = self.cursor.fetchall()
+            return fetched_data
+
     # Year functions
     def create_year_table(self):
         try:

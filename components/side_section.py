@@ -1,7 +1,9 @@
 from tkinter import *
 import tkinter.ttk as tk
+from PIL import ImageTk, Image
 from window import Window
 from database.database import Database
+from graph import Graph
 
 class Side_section(Window, Database):
 
@@ -26,7 +28,7 @@ class Side_section(Window, Database):
 
         # Check if daily_total_spent for the day is empty:
         if not daily_total_spent_db:
-            return ""
+            return "€0"
         else:
             return f"€{daily_total_spent_db[0][0]}"
 
@@ -57,14 +59,13 @@ class Side_section(Window, Database):
 
     # Initiate everything inside Frame 6
     def initiate_frame6(self):
-        self.frame6 = Frame(self.frame7, bd=0, bg=self.look_feel_settings["dark_blue"])
-        self.graph_label = Label(self.frame6, text="Graph:")
+        self.frame6 = Canvas(self.frame7, bd=0, highlightthickness=1)
 
     # Initiate everything inside Frame 5
     def initiate_frame5(self):
         self.frame5 = Frame(self.frame7, bd=0, bg=self.look_feel_settings["dark_blue"])
-        self.total_spent_today_label = Label(self.frame5, text="Total spent today: ", bg=self.look_feel_settings["dark_blue"], fg="white")
-        self.rem_balance_today_label = Label(self.frame5, text="Remaining balance today: ", bg=self.look_feel_settings["dark_blue"], fg="white")
+        self.total_spent_today_label = Label(self.frame5, text="Total spent today: ", bg=self.look_feel_settings["dark_blue"], fg="white", font=("Verdana", 15))
+        self.rem_balance_today_label = Label(self.frame5, text="Remaining balance today: ", bg=self.look_feel_settings["dark_blue"], fg="white", font=("Verdana", 15))
 
     # Initiate everything inside Frame 4
     def initiate_frame4(self):
@@ -79,8 +80,15 @@ class Side_section(Window, Database):
 
     # Display everything inside Frame 6
     def display_frame6(self):
-        self.frame6.grid(column=0, row=2, sticky="n", columnspan=3)
-        self.graph_label.grid(column=0, row=0)
+        # Generate graph image
+        self.handle_graph()
+
+        self.frame6.grid(column=0, row=2, sticky="")
+        self.img = PhotoImage(file="assets/graph.png")
+        self.frame6.create_image(self.frame6.winfo_height(),self.frame6.winfo_width(), image=self.img)
+
+        self.frame6.winfo_height()
+        self.frame6.winfo_width()
 
     # Display everything inside Frame 5
     def display_frame5(self):
@@ -107,3 +115,21 @@ class Side_section(Window, Database):
         self.display_frame4()
         self.display_frame5()
         self.display_frame6()
+
+    def fetch_db_graph_data(self):
+        Database.__init__(self, self.db_file)
+        selected_month = Window.selected_month
+        unordered_data = Database.fetch_monthitem_for_graph(self, selected_month)
+
+    def handle_graph(self):
+        selected_month = Window.selected_month
+        months = Window.months
+        days_count_to_plot = months[selected_month]
+
+        self.fetch_db_graph_data()
+
+        # Create instance of Graph class
+        graph = Graph(days_count_to_plot)
+
+        graph.collect_data()
+        graph.generate_graph_image()
