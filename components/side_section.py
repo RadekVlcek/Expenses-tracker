@@ -80,6 +80,7 @@ class Side_section(Window, Database):
     # Display everything inside Frame 4
     def display_frame4(self):
         self.frame4.grid(column=0, row=0, sticky="n", columnspan=3)
+        #self.frame4.grid_propagate(False)
         self.item_bought_label.grid(column=0, row=0, padx=15, sticky="n")
         self.amount_spent_label.grid(column=1, row=0, padx=15, sticky="n")
         self.remark_label.grid(column=2, row=0, padx=15, sticky="n")
