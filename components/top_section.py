@@ -38,7 +38,7 @@ class Top_section(Day, Month, Window):
 
         # Pass currently selected month to Window class
         Window.selected_day = 1
-        self.pass_top_right_section().config(text=f"{Window.selected_day}. {Window.selected_month} {Window.selected_year}")
+        self.pass_top_right_section().config(text=f"{Window.selected_day}. {Window.selected_month}, {Window.selected_year}")
 
         # Trigger displaying data for the day clicked
         self.update_side_section_data()
@@ -115,7 +115,7 @@ class Top_section(Day, Month, Window):
         self.selected_month_str = StringVar(self.window, Window.curr_month)
 
         # Frame 2 - for Frame 1, Item bought, Amount spent and Remark
-        frame2 = Frame(self.window, bg=self.look_feel_settings["dark_blue"], highlightthickness=1, highlightbackground="red")
+        frame2 = Frame(self.window, bg=self.look_feel_settings["dark_blue"])
         frame2.grid(row=0, column=0, pady=(15, 10), sticky="nswe")
         frame2.columnconfigure((1, 2, 3, 4, 5, 6, 7, 8), weight=1)
         frame2.rowconfigure(0, weight=1)

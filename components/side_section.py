@@ -51,7 +51,7 @@ class Side_section(Window, Database):
 
     # Initiate everything inside Frame 7
     def initiate_frame7(self):
-        self.frame7 = Frame(self.window, bg=self.look_feel_settings["dark_blue"], highlightthickness=1, highlightcolor="red")
+        self.frame7 = Frame(self.window, bg=self.look_feel_settings["dark_blue"])
         self.frame7.columnconfigure((0, 1, 2), weight=1)
         self.frame7.rowconfigure((0, 1, 2), weight=3)
 

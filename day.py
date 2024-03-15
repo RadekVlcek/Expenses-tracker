@@ -14,7 +14,6 @@ class Day(Window, Database):
         self.look_feel_settings = month_obj.look_feel_settings
         self.pass_top_right_section = pass_top_right_section
         self.db_file = Window.db_file
-        self.f3_day_frame_today = None
         self.selected_day_frame_label = None
 
     def display_day(self, row, col):
@@ -37,11 +36,11 @@ class Day(Window, Database):
     def today_button_props(self, day, month):
         actual_day_today = int(Window.curr_today)
         actual_month_today = str(Window.curr_month)
+
         if day == actual_day_today and month == actual_month_today:
-            self.f3_day_frame_today = self.f3_day_frame
-            return "day_today", 1
+            return 1
         else:
-            return "lighter_blue", 0
+            return 0
 
     def populate_day_props(self, day_index, month_id):
         # Configure button spacing
@@ -50,7 +49,7 @@ class Day(Window, Database):
 
         # Configure button default color
         today_button_props = self.today_button_props(day_index, month_id)
-        self.f3_day_frame.config(bg=self.look_feel_settings[today_button_props[0]])
+        self.f3_day_frame.config(bg=self.look_feel_settings["lighter_blue"], highlightthickness=today_button_props)
 
         # Configure button on-hover and off-hover color
         self.f3_day_frame.bind("<Enter>", self.handle_hover_enter)
@@ -60,33 +59,31 @@ class Day(Window, Database):
         self.f3_day_frame.bind("<Button-1>", partial(self.handle_day_click, day_index, self.f3_day_frame))
 
         # Day number label - top left corner
-        self.day_label = Label(self.f3_day_frame, text=day_index, font=("Verdana", 24), fg="white", bg=self.look_feel_settings[today_button_props[0]], padx=4, pady=2)
+        self.day_label = Label(self.f3_day_frame, text=day_index, font=("Verdana", 24), fg="white", bg=self.look_feel_settings["lighter_blue"], padx=4, pady=2)
         self.day_label.grid(row=0, column=0, sticky="nw")
         self.day_label.bind("<Button-1>", partial(self.handle_day_click, day_index, self.f3_day_frame))
 
         # Total spent per day label - middle
         self.daily_total_spent = self.fetch_monthitem_total_daily_spent(day_index, month_id)
-        self.spent_per_day_label = Label(self.f3_day_frame, text=f"{self.daily_total_spent}", fg="white", bg=self.look_feel_settings[today_button_props[0]])
+        self.spent_per_day_label = Label(self.f3_day_frame, text=f"{self.daily_total_spent}", fg="white", bg=self.look_feel_settings["lighter_blue"])
         self.spent_per_day_label.grid(row=1, column=0, columnspan=2)
         self.spent_per_day_label.bind("<Button-1>", partial(self.handle_day_click, day_index, self.f3_day_frame))
     
     def handle_hover_enter(self, event):
-        if self.f3_day_frame is not self.f3_day_frame_today:
-            self.f3_day_frame.config(bg=self.look_feel_settings["button_hover_enter"])
-            self.day_label.config(bg=self.look_feel_settings["button_hover_enter"])
-            self.spent_per_day_label.config(bg=self.look_feel_settings["button_hover_enter"])
+        self.f3_day_frame.config(bg=self.look_feel_settings["button_hover_enter"])
+        self.day_label.config(bg=self.look_feel_settings["button_hover_enter"])
+        self.spent_per_day_label.config(bg=self.look_feel_settings["button_hover_enter"])
 
     def handle_hover_leave(self, event):
-        if self.f3_day_frame is not self.f3_day_frame_today:
-            self.f3_day_frame.config(bg=self.look_feel_settings["lighter_blue"])
-            self.day_label.config(bg=self.look_feel_settings["lighter_blue"])
-            self.spent_per_day_label.config(bg=self.look_feel_settings["lighter_blue"])
+        self.f3_day_frame.config(bg=self.look_feel_settings["lighter_blue"])
+        self.day_label.config(bg=self.look_feel_settings["lighter_blue"])
+        self.spent_per_day_label.config(bg=self.look_feel_settings["lighter_blue"])
 
     def handle_day_click(self, day_index, event, f3_day_frame):
         # Update top right section with selected day, month and year
         Window.selected_day = day_index
         Window.selected_year = 2024
-        self.pass_top_right_section().config(text=f"{Window.selected_day}. {Window.selected_month} {Window.selected_year}")
+        self.pass_top_right_section().config(text=f"{Window.selected_day}. {Window.selected_month}, {Window.selected_year}")
 
         # Initiate Side_section object and reload the section
         side_section = Side_section(Window.selected_day, Window.selected_month, Window.selected_year)
