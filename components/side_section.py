@@ -36,28 +36,28 @@ class Side_section(Window, Database):
             Label(self.frame4, text="No spendings logged", fg="white", bg=self.look_feel_settings["dark_blue"]).grid(column=1, row=2)
 
     def display_frame5_data(self, daily_total_spent):
-        print(daily_total_spent)
+        self.total_spent_today_label.config(text=f"Total spent today: {daily_total_spent}")
 
     # Initiate everything inside Frame 7
     def initiate_frame7(self):
-        self.frame7 = Frame(self.window, background=self.look_feel_settings["dark_blue"], highlightthickness=1, highlightbackground="red")
+        self.frame7 = Frame(self.window, bg=self.look_feel_settings["dark_blue"], highlightthickness=1, highlightcolor="red")
         self.frame7.columnconfigure((0, 1, 2), weight=1)
         self.frame7.rowconfigure((0, 1, 2), weight=3)
 
     # Initiate everything inside Frame 6
     def initiate_frame6(self):
-        self.frame6 = Frame(self.frame7, bd=0, background=self.look_feel_settings["dark_blue"])
+        self.frame6 = Frame(self.frame7, bd=0, bg=self.look_feel_settings["dark_blue"])
         self.graph_label = Label(self.frame6, text="Graph:")
 
     # Initiate everything inside Frame 5
     def initiate_frame5(self):
-        self.frame5 = Frame(self.frame7, bd=0, background=self.look_feel_settings["dark_blue"])
-        self.total_spent_today_label = Label(self.frame5, text="Total spent today: ")
-        self.rem_balance_today_label = Label(self.frame5, text="Remaining balance today: ")
+        self.frame5 = Frame(self.frame7, bd=0, bg=self.look_feel_settings["dark_blue"])
+        self.total_spent_today_label = Label(self.frame5, text="Total spent today: ", bg=self.look_feel_settings["dark_blue"], fg="white")
+        self.rem_balance_today_label = Label(self.frame5, text="Remaining balance today: ", bg=self.look_feel_settings["dark_blue"], fg="white")
 
     # Initiate everything inside Frame 4
     def initiate_frame4(self):
-        self.frame4 = Frame(self.frame7, bd=0, background=self.look_feel_settings["dark_blue"])
+        self.frame4 = Frame(self.frame7, bd=0, bg=self.look_feel_settings["dark_blue"])
         self.item_bought_label = Label(self.frame4, text="Item name", fg="white", bg=self.look_feel_settings["dark_blue"])
         self.amount_spent_label = Label(self.frame4, text="Item price (€)", fg="white", bg=self.look_feel_settings["dark_blue"])
         self.remark_label = Label(self.frame4, text="Remark", fg="white", bg=self.look_feel_settings["dark_blue"])

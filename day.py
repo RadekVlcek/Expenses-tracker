@@ -23,13 +23,13 @@ class Day(Window, Database):
 
     def fetch_monthitem_total_daily_spent(self, day_id, month_id):
         Database.__init__(self, self.db_file)
-        daily_total_spent = Database.fetch_monthitem_total_daily_spent(self, day_id, month_id)
+        daily_total_spent_db = Database.fetch_monthitem_total_daily_spent(self, day_id, month_id)
 
         # Check if daily_total_spent for the day is empty:
-        if not daily_total_spent:
+        if not daily_total_spent_db:
             return ""
         else:
-            return f"€{daily_total_spent[0][0]}"
+            return f"€{daily_total_spent_db[0][0]}"
 
     def update_total_spent_for_day(self, updated_amount):
         self.spent_per_day_label.config(text=updated_amount)
@@ -65,8 +65,8 @@ class Day(Window, Database):
         self.day_label.bind("<Button-1>", partial(self.handle_day_click, day_index, self.f3_day_frame))
 
         # Total spent per day label - middle
-        daily_total_spent = self.fetch_monthitem_total_daily_spent(day_index, month_id)
-        self.spent_per_day_label = Label(self.f3_day_frame, text=f"{daily_total_spent}", fg="white", bg=self.look_feel_settings[today_button_props[0]])
+        self.daily_total_spent = self.fetch_monthitem_total_daily_spent(day_index, month_id)
+        self.spent_per_day_label = Label(self.f3_day_frame, text=f"{self.daily_total_spent}", fg="white", bg=self.look_feel_settings[today_button_props[0]])
         self.spent_per_day_label.grid(row=1, column=0, columnspan=2)
         self.spent_per_day_label.bind("<Button-1>", partial(self.handle_day_click, day_index, self.f3_day_frame))
     
@@ -96,8 +96,7 @@ class Day(Window, Database):
         side_section.display_frame4_data()
 
         # Trigger displaying data in frame5 for day clicked
-        #self.fetch_monthitem_total_daily_spent()
-        #side_section.display_frame5_data()
+        side_section.display_frame5_data(self.daily_total_spent)
 
         # Pass currently selected Day element to Window class
         self.pass_selected_day_amount_label()
