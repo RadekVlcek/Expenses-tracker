@@ -29,6 +29,9 @@ class Window:
     # Initially/currently selected "amount_spent" label in Day class
     selected_day_amount_label = None
 
+    # Total spent amount for selected month bottom section
+    total_monthly_spent = 0
+
     # Database filename
     db_file = "database/data/data.db"
 

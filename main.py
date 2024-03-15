@@ -7,17 +7,17 @@ from components.side_section import Side_section
 from components.bottom_section import Bottom_section
 from database.database import Database
 
-# Load up all components
+# Load up some components
 window_obj = Window()
 top_section_obj = Top_section()
 top_right_section_obj = Top_right_section()
 side_section_obj = Side_section(window_obj.selected_day, window_obj.selected_month, window_obj.selected_year)
 bottom_section_obj = Bottom_section()
 
-# Display Top right section
+# Process Top right section
 top_right_section_obj.display_frame8()
 
-# Display months and days
+# Process months and days
 # Store pair of each "month name" with each "month object"
 months_objects = {}
 
@@ -64,22 +64,28 @@ months_objects[window_obj.curr_month].frame3.tkraise()
 
 month_obj.init_month_db(window_obj.curr_month, window_obj.selected_month)
 
+# Set and pass initial "monthly_spent" value for bottom section
+months_objects[window_obj.curr_month].fetch_bottom_section_monthly_spent(window_obj.curr_month)
+init_total_spent_this_month = months_objects[window_obj.curr_month].return_total_spent_this_month()
+
 # Pass currently selected selected_day_amount_label to Top_section
 top_section_obj.pass_selected_day_amount_label(selected_day_amount_label)
 
 # Pass list of collected "amount_spent" labels for only first days of each month
 top_section_obj.pass_list_first_day_amount_labels(list_first_day_amount_labels)
 
-# Display Top section
+# Process Top section
 top_section_obj.display_frame2(window_obj.months.keys(), months_objects, top_right_section_obj.pass_top_right_section)
 
-# Display Side section & data
+# Process Side section & data
 side_section_obj.init_and_display_all()
 side_section_obj.display_frame4_data()
 side_section_obj.display_frame5_data()
 
-# Display Bottom section
+# Process Bottom section
+bottom_section_obj.initiate_frame9()
 bottom_section_obj.display_frame9()
+bottom_section_obj.pass_total_spent_this_month(init_total_spent_this_month)
 
-# Display window
+# Process window
 window_obj.display_window()

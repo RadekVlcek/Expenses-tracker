@@ -45,6 +45,9 @@ class Top_section(Day, Month, Window):
 
         self.apply_selected_day_amount_label(selected_month)
 
+        # Update Bottom_section monthly total_spent label
+        Month.fetch_bottom_section_monthly_spent(self, selected_month)
+
     def update_selected_month(self, new_month):
         Window.selected_month = new_month
     

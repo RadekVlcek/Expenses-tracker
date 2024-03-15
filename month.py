@@ -2,6 +2,7 @@ from tkinter import *
 import tkinter.ttk as tk
 from window import Window
 from database.database import Database
+from components.bottom_section import Bottom_section
 
 class Month(Window, Database):
     def __init__(self, month, days_count):
@@ -9,6 +10,8 @@ class Month(Window, Database):
         self.look_feel_settings = super().look_feel_settings
         self.days_count = days_count
         self.db_file = super().db_file
+
+        self.total_spent_this_month = 0
 
     def display_month(self):
         self.frame3 = Frame(self.window, bd=0, bg=self.look_feel_settings["dark_blue"], relief="solid", padx=0, pady=0)
@@ -70,4 +73,15 @@ class Month(Window, Database):
         for item in data:
             total_monthly_spent += int(item[0])
 
-        return total_monthly_spent
+        self.total_spent_this_month = total_monthly_spent
+
+        self.pass_total_spent_this_month()
+
+    def return_total_spent_this_month(self):
+        return self.total_spent_this_month
+
+    def pass_total_spent_this_month(self):
+        bottom_section = Bottom_section()
+        bottom_section.initiate_frame9()
+        bottom_section.update_total_spent(self.total_spent_this_month)
+        bottom_section.display_frame9()
