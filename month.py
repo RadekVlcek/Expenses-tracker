@@ -38,17 +38,18 @@ class Month(Window, Database):
             self.insert_monthitem_to_db(item_price)
 
     def insert_monthitem_to_db(self, item_price):
-        total_spent_today = item_price
+        spent_per_item = item_price
         remaining_balance = None
 
         Database.__init__(self, self.db_file)
-        Database.insert_monthitem(self, self.month_id, self.day_id, self.year_id, total_spent_today, remaining_balance)
+        Database.insert_monthitem(self, self.month_id, self.day_id, self.year_id, spent_per_item, remaining_balance)
 
     def update_monthitem(self):
         new_total_spent_today = self.calculate_daily_spent()
+        new_remaining_balance = None
 
         Database.__init__(self, self.db_file)
-        Database.update_monthitem(self, self.month_id, self.day_id, new_total_spent_today)
+        Database.update_monthitem(self, self.month_id, self.day_id, new_total_spent_today, new_remaining_balance)
 
     def fetch_dayitem_total_spent(self):
         Database.__init__(self, self.db_file)
@@ -64,6 +65,9 @@ class Month(Window, Database):
             result += item[0]
             
         return result
+
+    def calculate_remaining_balance(self):
+        pass
 
     def fetch_bottom_section_monthly_spent(self, month_id):
         Database.__init__(self, self.db_file)

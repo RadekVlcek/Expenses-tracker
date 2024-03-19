@@ -72,9 +72,9 @@ class Database:
             self.conn.commit()
             print("DB: Monthitem table: Data inserted into Month table.")
 
-    def update_monthitem(self, month_id, day_id, new_amount):
+    def update_monthitem(self, month_id, day_id, new_amount, new_remaining_balance):
         try:
-            self.cursor.execute("UPDATE MonthItem SET TotalSpentToday = ? WHERE MonthID = ? AND DayID = ?", (new_amount, month_id, day_id, ))
+            self.cursor.execute("UPDATE MonthItem SET TotalSpentToday = ?, RemainingBalanceToday = ? WHERE MonthID = ? AND DayID = ?", (new_amount, new_remaining_balance, month_id, day_id, ))
         except sqlite3.Error as e:
             print(f"DB: Error (update_monthitem): {e}")
         else:
@@ -97,7 +97,7 @@ class Database:
             print(f"DB: Error (fetch_monthitem_total_daily_spent): {e}")
         else:
             fetched_data = self.cursor.fetchall()
-            return fetched_data
+            return fetched_data    
 
     def check_if_day_exists(self, month_id, day_id):
         try:
@@ -140,6 +140,41 @@ class Database:
             print(f"DB: Error (create_year_table): {e}")
         else:
             self.conn.commit()
+
+    def create_remaining_balance_table(self):
+        try:
+            self.cursor.execute("CREATE TABLE IF NOT EXISTS RemainingBalanceTable (RemainingBalance INT)")
+        except sqlite3.Error as e:
+            print(f"DB: Error (create_remaining_balance_table): {e}")
+        else:
+            self.conn.commit()
+            print("create_remaining_balance_table created")
+
+    def insert_remaining_balance_table(self, value):
+        try:
+            self.cursor.execute("INSERT INTO RemainingBalanceTable VALUES (?)", (value, ))
+        except sqlite3.Error as e:
+            print(f"DB: Error (insert_remaining_balance_table): {e}")
+        else:
+            self.conn.commit()
+
+    def update_remaining_balance_table(self, new_value):
+        try:
+            self.cursor.execute("UPDATE RemainingBalanceTable SET RemainingBalance = ?", (new_value, ))
+        except sqlite3.Error as e:
+            print(f"DB: Error (update_remaining_balance_table): {e}")
+        else:
+            self.conn.commit()
+
+    def fetch_remaining_balance_table(self):
+        try:
+            self.cursor.execute("SELECT * FROM RemainingBalanceTable")
+        except sqlite3.Error as e:
+            print(f"DB: Error (fetch_remaining_balance_table): {e}")
+        else:
+            fetched_data = self.cursor.fetchall()
+            print("DB: DayItem table: All daily data fetched.")
+            return int(fetched_data[0][0])
 
 """
     def __del__(self):

@@ -6,6 +6,9 @@ class Window:
     # Initialize Tk main window
     window = Tk()
 
+    # Database filename
+    db_file = "database/data/data.db"
+
     # Colors
     look_feel_settings = {
         "dark_blue": "#0a1829",
@@ -32,9 +35,8 @@ class Window:
     # Total spent amount for selected month bottom section
     total_monthly_spent = 0
 
-    # Database filename
-    db_file = "database/data/data.db"
-
+    # Initial remaining balance
+    remaining_balance = 0
 
     months = {
         "January": 31,
@@ -69,8 +71,6 @@ class Window:
         self.window.rowconfigure(0, weight=0)
         self.window.rowconfigure(1, weight=1)
         self.window.rowconfigure(2, weight=1)
-
-
 
     def display_window(self):
         self.window.mainloop()

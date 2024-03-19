@@ -60,6 +60,7 @@ class Side_section(Window, Database):
     # Initiate everything inside Frame 6
     def initiate_frame6(self):
         self.frame6 = Canvas(self.frame7, bd=0, highlightthickness=1)
+        self.frame6.config(width=320, height=220)
 
     # Initiate everything inside Frame 5
     def initiate_frame5(self):
@@ -83,12 +84,13 @@ class Side_section(Window, Database):
         # Generate graph image
         self.handle_graph()
 
+        # Display graph image inside frame6
         self.frame6.grid(column=0, row=2, sticky="")
         self.img = PhotoImage(file="assets/graph.png")
         self.frame6.create_image(self.frame6.winfo_height(),self.frame6.winfo_width(), image=self.img)
 
-        self.frame6.winfo_height()
-        self.frame6.winfo_width()
+        print(self.frame6.winfo_height())
+        print(self.frame6.winfo_width())
 
     # Display everything inside Frame 5
     def display_frame5(self):
