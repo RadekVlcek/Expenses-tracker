@@ -7,6 +7,7 @@ class Bottom_section(Window):
     def __init__(self):
         self.window = super().window
         self.look_feel_settings = super().look_feel_settings
+        self.fetch_remaining_balance()
 
     def initiate_frame9(self):
         self.frame9 = Frame(self.window, bg=self.look_feel_settings["dark_blue"])
@@ -33,3 +34,6 @@ class Bottom_section(Window):
 
     def pass_total_spent_this_month(self, new_total_spent):
         self.f5_total_spent_value.config(text=f"€{new_total_spent}")
+
+    def fetch_remaining_balance(self):
+        pass

@@ -66,8 +66,11 @@ class Month(Window, Database):
             
         return result
 
-    def calculate_remaining_balance(self):
-        pass
+    def fetch_remaining_balance(self):
+        Database.__init__(self, self.db_file)
+        remaining_balance = Database.fetch_remaining_balance_table(self)
+
+        return remaining_balance
 
     def fetch_bottom_section_monthly_spent(self, month_id):
         Database.__init__(self, self.db_file)

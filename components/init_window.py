@@ -17,9 +17,6 @@ class Init_window(Window, Database):
         value = self.init_rem_value_entry.get()
         print(value)
         if value.isdigit():
-            # Store the value in Window.remaining_balance variable
-            Window.remaining_balance = value
-
             # Store the value in DB
             self.insert_remaining_balance_table(value)
         else:

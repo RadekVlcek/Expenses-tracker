@@ -1,4 +1,3 @@
-import os
 from window import Window
 from month import Month
 from day import Day
@@ -8,17 +7,18 @@ from components.side_section import Side_section
 from components.bottom_section import Bottom_section
 from components.init_window import Init_window
 from database.database import Database
+import os
 
-# Load up some components
+# Initiate main window
 window_obj = Window()
-top_section_obj = Top_section()
-top_right_section_obj = Top_right_section()
-side_section_obj = Side_section(window_obj.selected_day, window_obj.selected_month, window_obj.selected_year)
-bottom_section_obj = Bottom_section()
-
 
 def display_main_window():
-    print("DB exists")
+
+    # Load up some components
+    top_section_obj = Top_section()
+    top_right_section_obj = Top_right_section()
+    side_section_obj = Side_section(window_obj.selected_day, window_obj.selected_month, window_obj.selected_year)
+    bottom_section_obj = Bottom_section()
 
     # Process Top right section
     top_right_section_obj.display_frame8()
@@ -97,6 +97,7 @@ def display_init_window():
     # Process initial window for entering initial remaining balance
     init_window_obj = Init_window()
     init_window_obj.initialize_init_window()
+    init_window_obj.display_init_window()
 
     # Init database and create remaining balance table if it doesn't exist
     #database = Database(window_obj.db_file)   
