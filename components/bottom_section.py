@@ -13,20 +13,20 @@ class Bottom_section(Window):
         self.frame9.columnconfigure((0, 1, 2, 3), weight=1)
         self.frame9.rowconfigure(0, weight=1)
 
-        self.f5_total_spent_label = Label(self.frame9, text="Total spent this month ", fg="white", bg=self.look_feel_settings["dark_blue"])
-        self.f5_total_spent_value = Label(self.frame9, text="", fg="white", bg=self.look_feel_settings["dark_blue"], font=("Verdana", 24))
-
         self.f5_rem_balance_label = Label(self.frame9, text="Current remaining balance ", fg="white", bg=self.look_feel_settings["dark_blue"])
         self.f5_rem_balance_value = Label(self.frame9, text="", fg="white", bg=self.look_feel_settings["dark_blue"], font=("Verdana", 24))
+
+        self.f5_total_spent_label = Label(self.frame9, text="Total spent this month ", fg="white", bg=self.look_feel_settings["dark_blue"])
+        self.f5_total_spent_value = Label(self.frame9, text="", fg="white", bg=self.look_feel_settings["dark_blue"], font=("Verdana", 24))
 
     def display_frame9(self):
         self.frame9.grid(row=2, column=0, sticky="nswe")
 
-        self.f5_total_spent_label.grid(row=0, column=0, sticky="e")
-        self.f5_total_spent_value.grid(row=0, column=1, sticky="w")
+        self.f5_rem_balance_label.grid(row=0, column=0, sticky="e")
+        self.f5_rem_balance_value.grid(row=0, column=1, sticky="w")
 
-        self.f5_rem_balance_label.grid(row=0, column=2, sticky="e")
-        self.f5_rem_balance_value.grid(row=0, column=3, sticky="w")
+        self.f5_total_spent_label.grid(row=0, column=2, sticky="e")
+        self.f5_total_spent_value.grid(row=0, column=3, sticky="w")
 
     def update_total_spent(self, new_total_spent, new_remaining_balance):
         self.f5_total_spent_value.config(text=f"€{new_total_spent}")

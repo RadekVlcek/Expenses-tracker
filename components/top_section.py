@@ -74,11 +74,13 @@ class Top_section(Day, Month, Window):
             # Update DayItem database
             Day.insert_dayitem_to_db(self, day_id, month_id, item_name, item_price, item_remark)
 
+            # Update MonthItem database
+            Month.handle_month_input(self, int(item_price))
+
             # Trigger displaing updated remaining balance
             Month.update_remaining_balance(self, int(item_price))
 
-            # Update MonthItem database
-            Month.handle_month_input(self, int(item_price))
+
 
             # Trigger displaying updated data in Side_section
             self.update_side_section_data()
