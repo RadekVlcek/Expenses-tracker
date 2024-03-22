@@ -31,7 +31,7 @@ class Side_section(Window, Database):
         if not daily_total_spent_db:
             return "€0"
         else:
-            return f"€{daily_total_spent_db[0][0]}", f"€{remaining_balance_today_db[0][0]}"
+            return f"{daily_total_spent_db[0][0]}", f"{remaining_balance_today_db[0][0]}"
 
     def display_frame4_data(self):
         data = self.fetch_frame4_data()
@@ -50,8 +50,8 @@ class Side_section(Window, Database):
 
     def display_frame5_data(self):
         data = self.fetch_frame5_data()
-        self.total_spent_today_label.config(text=f"Total spent today: {data[0]}")
-        self.rem_balance_today_label.config(text=f"Remaining balance today: {data[1]}")
+        self.total_spent_today_label.config(text=f"Total spent today: €{data[0]}")
+        self.rem_balance_today_label.config(text=f"Remaining balance today: €{data[1]}")
 
     # Initiate everything inside Frame 7
     def initiate_frame7(self):
@@ -67,8 +67,8 @@ class Side_section(Window, Database):
     # Initiate everything inside Frame 5
     def initiate_frame5(self):
         self.frame5 = Frame(self.frame7, bd=0, bg=self.look_feel_settings["dark_blue"])
-        self.total_spent_today_label = Label(self.frame5, text="Total spent today: ", bg=self.look_feel_settings["dark_blue"], fg="white", font=("Verdana", 15))
-        self.rem_balance_today_label = Label(self.frame5, text="Remaining balance today: ", bg=self.look_feel_settings["dark_blue"], fg="white", font=("Verdana", 15))
+        self.total_spent_today_label = Label(self.frame5, bg=self.look_feel_settings["dark_blue"], fg="white", font=("Verdana", 15))
+        self.rem_balance_today_label = Label(self.frame5, bg=self.look_feel_settings["dark_blue"], fg="white", font=("Verdana", 15))
 
     # Initiate everything inside Frame 4
     def initiate_frame4(self):
