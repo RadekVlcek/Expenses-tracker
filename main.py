@@ -71,8 +71,9 @@ def display_main_window():
     month_obj.init_month_db(window_obj.curr_month, window_obj.selected_month)
 
     # Set and pass initial "monthly_spent" value for bottom section
-    months_objects[window_obj.curr_month].fetch_bottom_section_monthly_spent(window_obj.curr_month)
-    init_total_spent_this_month = months_objects[window_obj.curr_month].return_total_spent_this_month()
+    months_objects[window_obj.curr_month].fetch_bottom_section_figures(window_obj.curr_month)
+    init_total_spent_this_month = months_objects[window_obj.curr_month].return_new_bottom_section_figures()[0]
+    init_remaining_balance = months_objects[window_obj.curr_month].return_new_bottom_section_figures()[1]
 
     # Pass currently selected selected_day_amount_label to Top_section
     top_section_obj.pass_selected_day_amount_label(selected_day_amount_label)
@@ -91,7 +92,7 @@ def display_main_window():
     # Process Bottom section
     bottom_section_obj.initiate_frame9()
     bottom_section_obj.display_frame9()
-    bottom_section_obj.pass_total_spent_this_month(init_total_spent_this_month)
+    bottom_section_obj.pass_total_spent_this_month(init_total_spent_this_month, init_remaining_balance)
 
 def display_init_window():
     # Process initial window for entering initial remaining balance

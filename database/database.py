@@ -117,6 +117,15 @@ class Database:
             fetched_data = self.cursor.fetchall()
             return fetched_data
 
+    def fetch_monthitem_remaining_balance(self, day_id, month_id):
+        try:
+            self.cursor.execute("SELECT RemainingBalanceToday FROM MonthItem WHERE DayID = ? AND MonthID = ?", (day_id, month_id, ))
+        except sqlite3.Error as e:
+            print(f"DB: Error (fetch_monthitem_remaining_balance): {e}")
+        else:
+            fetched_data = self.cursor.fetchall()
+            return fetched_data   
+
     def fetch_monthitem_for_graph(self, month_id):
         try:
             self.cursor.execute("SELECT DayID, TotalSpentToday FROM MonthItem WHERE MonthID = ?", (month_id, ))

@@ -25,12 +25,13 @@ class Side_section(Window, Database):
     def fetch_frame5_data(self):
         Database.__init__(self, self.db_file)
         daily_total_spent_db = Database.fetch_monthitem_total_daily_spent(self, self.selected_day, self.selected_month)
+        remaining_balance_today_db = Database.fetch_monthitem_remaining_balance(self, self.selected_day, self.selected_month)
 
         # Check if daily_total_spent for the day is empty:
         if not daily_total_spent_db:
             return "€0"
         else:
-            return f"€{daily_total_spent_db[0][0]}"
+            return f"€{daily_total_spent_db[0][0]}", f"€{remaining_balance_today_db[0][0]}"
 
     def display_frame4_data(self):
         data = self.fetch_frame4_data()
@@ -49,7 +50,8 @@ class Side_section(Window, Database):
 
     def display_frame5_data(self):
         data = self.fetch_frame5_data()
-        self.total_spent_today_label.config(text=f"Total spent today: {data}")
+        self.total_spent_today_label.config(text=f"Total spent today: {data[0]}")
+        self.rem_balance_today_label.config(text=f"Remaining balance today: {data[1]}")
 
     # Initiate everything inside Frame 7
     def initiate_frame7(self):
@@ -88,9 +90,6 @@ class Side_section(Window, Database):
         self.frame6.grid(column=0, row=2, sticky="")
         self.img = PhotoImage(file="assets/graph.png")
         self.frame6.create_image(self.frame6.winfo_height(),self.frame6.winfo_width(), image=self.img)
-
-        print(self.frame6.winfo_height())
-        print(self.frame6.winfo_width())
 
     # Display everything inside Frame 5
     def display_frame5(self):

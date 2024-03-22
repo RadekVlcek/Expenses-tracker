@@ -33,20 +33,22 @@ class Month(Window, Database):
         day_entry_exists = Database.check_if_day_exists(self, self.month_id, self.day_id)
 
         if day_entry_exists:
-            self.update_monthitem()
+            self.update_monthitem(item_price)
         else:
             self.insert_monthitem_to_db(item_price)
 
     def insert_monthitem_to_db(self, item_price):
         spent_per_item = item_price
-        remaining_balance = None
+        remaining_balance = self.fetch_remaining_balance()
+        new_remaining_balance = remaining_balance - item_price
 
         Database.__init__(self, self.db_file)
-        Database.insert_monthitem(self, self.month_id, self.day_id, self.year_id, spent_per_item, remaining_balance)
+        Database.insert_monthitem(self, self.month_id, self.day_id, self.year_id, spent_per_item, new_remaining_balance)
 
-    def update_monthitem(self):
+    def update_monthitem(self, item_price):
         new_total_spent_today = self.calculate_daily_spent()
-        new_remaining_balance = None
+        remaining_balance = self.fetch_remaining_balance()
+        new_remaining_balance = remaining_balance - item_price
 
         Database.__init__(self, self.db_file)
         Database.update_monthitem(self, self.month_id, self.day_id, new_total_spent_today, new_remaining_balance)
@@ -66,29 +68,37 @@ class Month(Window, Database):
             
         return result
 
+    def update_remaining_balance(self, item_price):
+        remaining_balance = self.fetch_remaining_balance()
+        new_remaining_balance = remaining_balance - item_price
+
+        Database.update_remaining_balance_table(self, new_remaining_balance)
+
     def fetch_remaining_balance(self):
         Database.__init__(self, self.db_file)
         remaining_balance = Database.fetch_remaining_balance_table(self)
 
         return remaining_balance
 
-    def fetch_bottom_section_monthly_spent(self, month_id):
+    def fetch_bottom_section_figures(self, month_id):
         Database.__init__(self, self.db_file)
-        data = Database.fetch_monthitem_total_monthly_spent(self, month_id)
+        new_monthly_spent = Database.fetch_monthitem_total_monthly_spent(self, month_id)
+        new_remaining_balance = Database.fetch_remaining_balance_table(self)
         
         total_monthly_spent = 0
-        for item in data:
+        for item in new_monthly_spent:
             total_monthly_spent += int(item[0])
 
         self.total_spent_this_month = total_monthly_spent
+        self.new_remaining_balance = new_remaining_balance
 
-        self.pass_total_spent_this_month()
+        self.pass_bottom_section_figures(total_monthly_spent, new_remaining_balance)
 
-    def return_total_spent_this_month(self):
-        return self.total_spent_this_month
+    def return_new_bottom_section_figures(self):
+        return self.total_spent_this_month, self.new_remaining_balance
 
-    def pass_total_spent_this_month(self):
+    def pass_bottom_section_figures(self, total_monthly_spent, new_remaining_balance):
         bottom_section = Bottom_section()
         bottom_section.initiate_frame9()
-        bottom_section.update_total_spent(self.total_spent_this_month)
+        bottom_section.update_total_spent(total_monthly_spent, new_remaining_balance)
         bottom_section.display_frame9()

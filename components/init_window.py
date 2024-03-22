@@ -13,9 +13,8 @@ class Init_window(Window, Database):
         self.db_file = super().db_file
 
     def save_init_rem_balance(self, event):
-        
         value = self.init_rem_value_entry.get()
-        print(value)
+        
         if value.isdigit():
             # Store the value in DB
             self.insert_remaining_balance_table(value)
