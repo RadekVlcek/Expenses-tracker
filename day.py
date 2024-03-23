@@ -66,7 +66,7 @@ class Day(Window, Database):
         # Total spent per day label - middle
         self.daily_total_spent = self.fetch_monthitem_total_daily_spent(day_index, month_id)
         self.spent_per_day_label = Label(self.f3_day_frame, text=f"{self.daily_total_spent}", fg="white", bg=self.look_feel_settings["lighter_blue"])
-        self.spent_per_day_label.grid(row=1, column=0, columnspan=2)
+        self.spent_per_day_label.grid(row=1, column=0, columnspan=2, sticky="")
         self.spent_per_day_label.bind("<Button-1>", partial(self.handle_day_click, day_index, self.f3_day_frame))
     
     def handle_hover_enter(self, event):

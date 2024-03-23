@@ -93,7 +93,7 @@ class Side_section(Window, Database):
 
     # Display everything inside Frame 5
     def display_frame5(self):
-        self.frame5.grid(column=0, row=1, sticky="n", columnspan=3)
+        self.frame5.grid(column=0, row=1, sticky="")
         self.total_spent_today_label.grid(column=0, row=0)
         self.rem_balance_today_label.grid(column=0, row=1)
     

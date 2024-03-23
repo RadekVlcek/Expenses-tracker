@@ -9,9 +9,6 @@ from components.init_window import Init_window
 from database.database import Database
 import os
 
-# Initiate main window
-window_obj = Window()
-
 def display_main_window():
 
     # Load up some components
@@ -100,10 +97,8 @@ def display_init_window():
     init_window_obj.initialize_init_window()
     init_window_obj.display_init_window()
 
-    # Init database and create remaining balance table if it doesn't exist
-    #database = Database(window_obj.db_file)   
-   # database.create_remaining_balance_table()
-    #database.insert_remaining_balance_table(new_balance)
+# Initiate main window
+window_obj = Window()
 
 # If DB file exists, run the main window, otherwise initial window
 if os.path.isfile(window_obj.db_file):

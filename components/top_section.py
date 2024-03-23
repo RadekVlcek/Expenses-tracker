@@ -80,8 +80,6 @@ class Top_section(Day, Month, Window):
             # Trigger displaing updated remaining balance
             Month.update_remaining_balance(self, int(item_price))
 
-
-
             # Trigger displaying updated data in Side_section
             self.update_side_section_data()
 
