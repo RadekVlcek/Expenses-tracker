@@ -58,12 +58,11 @@ class Side_section(Window, Database):
         self.frame7 = Frame(self.window, bg=self.look_feel_settings["dark_blue"])
         self.frame7.columnconfigure((0, 1, 2), weight=1)
         self.frame7.rowconfigure((0, 1, 2), weight=3)
-        
 
     # Initiate everything inside Frame 6
     def initiate_frame6(self):
-        self.frame6 = Canvas(self.frame7, bd=0, highlightthickness=1)
-        self.frame6.config(width=320, height=220)
+        self.frame6 = Canvas(self.frame7, bd=0, highlightthickness=1, width=300)
+        self.frame6.config(width=300)
 
     # Initiate everything inside Frame 5
     def initiate_frame5(self):
@@ -85,13 +84,16 @@ class Side_section(Window, Database):
 
     # Display everything inside Frame 6
     def display_frame6(self):
+        from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
         # Generate graph image
         self.handle_graph()
 
         # Display graph image inside frame6
-        self.frame6.grid(column=0, row=2, sticky="")
-        self.img = PhotoImage(file="assets/graph.png")
-        self.frame6.create_image(self.frame6.winfo_height(),self.frame6.winfo_width(), image=self.img)
+        self.frame6.grid(column=0, row=2)
+
+        self.canvas = FigureCanvasTkAgg(self.graph.fig, master=self.frame6)
+        self.canvas.draw()
+        self.canvas.get_tk_widget().grid(column=0, row=0)
 
     # Display everything inside Frame 5
     def display_frame5(self):
@@ -124,6 +126,7 @@ class Side_section(Window, Database):
         Database.__init__(self, self.db_file)
         selected_month = Window.selected_month
         unordered_data = Database.fetch_monthitem_for_graph(self, selected_month)
+        print(unordered_data)
 
     def handle_graph(self):
         selected_month = Window.selected_month
@@ -133,7 +136,6 @@ class Side_section(Window, Database):
         self.fetch_db_graph_data()
 
         # Create instance of Graph class
-        graph = Graph(days_count_to_plot)
-
-        graph.collect_data()
-        graph.generate_graph_image()
+        self.graph = Graph(days_count_to_plot)
+        self.graph.collect_data()
+        self.graph.generate_graph_image()

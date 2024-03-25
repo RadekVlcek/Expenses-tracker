@@ -13,6 +13,6 @@ class Graph:
         self.y_axis = range(1, self.days_count)
 
     def generate_graph_image(self):
+        plt.figure(figsize=(3.4, 2.5))
         plt.stem(self.x_axis, self.y_axis)
-        #plt.ylim(0, 0)
-        plt.savefig("assets/graph.png", bbox_inches='tight')
+        self.fig = plt.gcf()
