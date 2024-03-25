@@ -7,8 +7,6 @@ from functools import partial
 
 class Day(Window, Database):
 
-    test = None
-
     def __init__(self, month_obj, pass_top_right_section):
         self.frame3 = month_obj.frame3
         self.look_feel_settings = month_obj.look_feel_settings
@@ -101,9 +99,23 @@ class Day(Window, Database):
     # Insert data into DayItem table. Called from database.py
     def insert_dayitem_to_db(self, day_id, month_id, item_name, item_price, item_remark):
         Database.__init__(self, self.db_file)
-        self.create_day_table()
-        self.insert_dayitem(day_id, month_id, item_name, item_price, item_remark)
-        self.clear_entries()
+        remaining_balance = self.fetch_remaining_balance()
+
+        if self.remaining_balance_is_valid(remaining_balance, item_price):
+            self.create_day_table()
+            self.insert_dayitem(day_id, month_id, item_name, int(item_price), item_remark)
+            self.clear_entries()
+
+    def remaining_balance_is_valid(self, remaining_balance, item_price):
+        if (remaining_balance - int(item_price)) > 0:
+            return True
+        else:
+            return False
+
+    def fetch_remaining_balance(self):
+        # DB already connected at this point
+        remaining_balance = Database.fetch_remaining_balance_table(self)
+        return remaining_balance
 
     # Pass selected_day_amount_label to Window object
     def pass_selected_day_amount_label(self):

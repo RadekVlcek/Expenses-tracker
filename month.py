@@ -40,11 +40,14 @@ class Month(Window, Database):
     def insert_monthitem_to_db(self, item_price):
         spent_per_item = item_price
         remaining_balance = self.fetch_remaining_balance()
-        
+
         if self.remaining_balance_is_valid(remaining_balance, item_price):
             new_remaining_balance = remaining_balance - item_price
             Database.__init__(self, self.db_file)
             Database.insert_monthitem(self, self.month_id, self.day_id, self.year_id, spent_per_item, new_remaining_balance)
+        else:
+            from tkinter import messagebox
+            messagebox.showinfo(self.window, message="Amount spent must be lower than current remaining balance.")
 
     def update_monthitem(self, item_price):
         new_total_spent_today = self.calculate_daily_spent()
@@ -54,13 +57,15 @@ class Month(Window, Database):
             new_remaining_balance = remaining_balance - item_price
             Database.__init__(self, self.db_file)
             Database.update_monthitem(self, self.month_id, self.day_id, new_total_spent_today, new_remaining_balance)
+        else:
+            from tkinter import messagebox
+            messagebox.showinfo(self.window, message="Amount spent must be lower than current remaining balance.")
 
     def remaining_balance_is_valid(self, remaining_balance, item_price):
         if (remaining_balance - item_price) > 0:
             return True
         else:
-            from tkinter import messagebox
-            messagebox.showinfo(self.window, message="Amount spent must be lower than current remaining balance.")
+            return False
 
     def fetch_dayitem_total_spent(self):
         Database.__init__(self, self.db_file)
@@ -77,7 +82,7 @@ class Month(Window, Database):
             
         return result
 
-    def update_remaining_balance(self, item_price):
+    def update_remaining_balance_table(self, item_price):
         remaining_balance = self.fetch_remaining_balance()
 
         if self.remaining_balance_is_valid(remaining_balance, item_price):
@@ -107,8 +112,6 @@ class Month(Window, Database):
 
     def return_new_bottom_section_figures(self):
         return self.total_spent_this_month, self.new_remaining_balance
-
-
 
     def pass_bottom_section_figures(self, total_monthly_spent, new_remaining_balance):
         bottom_section = Bottom_section()
