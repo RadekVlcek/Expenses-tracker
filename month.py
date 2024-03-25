@@ -47,7 +47,7 @@ class Month(Window, Database):
             Database.insert_monthitem(self, self.month_id, self.day_id, self.year_id, spent_per_item, new_remaining_balance)
         else:
             from tkinter import messagebox
-            messagebox.showinfo(self.window, message="Amount spent must be lower than current remaining balance.")
+            messagebox.showinfo(self.window, message="Amount spent cannot be higher than the current remaining balance.")
 
     def update_monthitem(self, item_price):
         new_total_spent_today = self.calculate_daily_spent()
@@ -59,7 +59,7 @@ class Month(Window, Database):
             Database.update_monthitem(self, self.month_id, self.day_id, new_total_spent_today, new_remaining_balance)
         else:
             from tkinter import messagebox
-            messagebox.showinfo(self.window, message="Amount spent must be lower than current remaining balance.")
+            messagebox.showinfo(self.window, message="Amount spent cannot be higher than the current remaining balance.")
 
     def remaining_balance_is_valid(self, remaining_balance, item_price):
         if (remaining_balance - item_price) > 0:

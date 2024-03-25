@@ -102,9 +102,13 @@ class Day(Window, Database):
         remaining_balance = self.fetch_remaining_balance()
 
         if self.remaining_balance_is_valid(remaining_balance, item_price):
-            self.create_day_table()
-            self.insert_dayitem(day_id, month_id, item_name, int(item_price), item_remark)
-            self.clear_entries()
+            if int(item_price) > 0:
+                self.create_day_table()
+                self.insert_dayitem(day_id, month_id, item_name, int(item_price), item_remark)
+                self.clear_entries()
+            else:
+                from tkinter import messagebox
+                messagebox.showinfo(self.window, message="Item price cannot be €0.")
 
     def remaining_balance_is_valid(self, remaining_balance, item_price):
         if (remaining_balance - int(item_price)) > 0:
