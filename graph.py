@@ -14,5 +14,6 @@ class Graph:
 
     def generate_graph_image(self):
         plt.figure(figsize=(3.4, 2.5))
-        plt.stem(self.x_axis, self.y_axis)
+        plt.stem(self.x_axis, self.y_axis, linefmt='#193c67')  # Adjust line and marker formats
+        plt.tight_layout(pad=0.4)  # Adjust layout
         self.fig = plt.gcf()
