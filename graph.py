@@ -10,9 +10,9 @@ class Graph:
 
     def collect_data(self):
         self.x_axis = range(1, self.days_count)
-        self.y_axis = np.random.uniform(size=self.days_count - 1)
+        self.y_axis = range(1, self.days_count)
 
     def generate_graph_image(self):
         plt.stem(self.x_axis, self.y_axis)
-        plt.ylim(0, 1.2)
+        #plt.ylim(0, 0)
         plt.savefig("assets/graph.png", bbox_inches='tight')

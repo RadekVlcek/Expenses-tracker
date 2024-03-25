@@ -58,6 +58,7 @@ class Side_section(Window, Database):
         self.frame7 = Frame(self.window, bg=self.look_feel_settings["dark_blue"])
         self.frame7.columnconfigure((0, 1, 2), weight=1)
         self.frame7.rowconfigure((0, 1, 2), weight=3)
+        
 
     # Initiate everything inside Frame 6
     def initiate_frame6(self):
@@ -72,7 +73,8 @@ class Side_section(Window, Database):
 
     # Initiate everything inside Frame 4
     def initiate_frame4(self):
-        self.frame4 = Frame(self.frame7, bd=0, bg=self.look_feel_settings["dark_blue"])
+        self.frame4 = Frame(self.frame7, bd=0, bg=self.look_feel_settings["dark_blue"], height=30, width=20)
+        self.frame4.grid_propagate(1)
         self.item_bought_label = Label(self.frame4, text="Item name", fg="white", bg=self.look_feel_settings["dark_blue"])
         self.amount_spent_label = Label(self.frame4, text="Item price (€)", fg="white", bg=self.look_feel_settings["dark_blue"])
         self.remark_label = Label(self.frame4, text="Remark", fg="white", bg=self.look_feel_settings["dark_blue"])
@@ -96,6 +98,7 @@ class Side_section(Window, Database):
         self.frame5.grid(column=0, row=1, sticky="")
         self.total_spent_today_label.grid(column=0, row=0)
         self.rem_balance_today_label.grid(column=0, row=1)
+        #self.frame5.grid_propagate(False)
     
     # Display everything inside Frame 4
     def display_frame4(self):
