@@ -3,6 +3,7 @@ import tkinter.ttk as tk
 from window import Window
 from database.database import Database
 from components.bottom_section import Bottom_section
+from components.side_section import Side_section
 
 class Month(Window, Database):
     def __init__(self, month, days_count):
@@ -109,6 +110,14 @@ class Month(Window, Database):
         self.new_remaining_balance = new_remaining_balance
 
         self.pass_bottom_section_figures(total_monthly_spent, new_remaining_balance)
+
+    def update_graph(self):
+        side_section = Side_section(self.day_id, self.month_id, self.year_id)
+        #side_section.init_and_display_all()
+        side_section.initiate_frame7()
+        side_section.initiate_frame6()
+        side_section.display_frame7()
+        side_section.display_frame6()
 
     def return_new_bottom_section_figures(self):
         return self.total_spent_this_month, self.new_remaining_balance

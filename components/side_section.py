@@ -61,8 +61,7 @@ class Side_section(Window, Database):
 
     # Initiate everything inside Frame 6
     def initiate_frame6(self):
-        self.frame6 = Canvas(self.frame7, bd=0, highlightthickness=1, width=300)
-        self.frame6.config(width=300)
+        self.frame6 = Canvas(self.frame7)
 
     # Initiate everything inside Frame 5
     def initiate_frame5(self):
@@ -139,3 +138,5 @@ class Side_section(Window, Database):
         self.graph = Graph(days_count_to_plot)
         self.graph.collect_data()
         self.graph.generate_graph_image()
+
+        #self.graph.close_graph()
