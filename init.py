@@ -1,3 +1,5 @@
+## This file decides which of the two windows to display.
+
 # Process main window
 def display_main_window(window_obj):
 
