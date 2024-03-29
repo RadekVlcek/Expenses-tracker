@@ -10,8 +10,8 @@ class Graph:
 
     def collect_data(self, graph_data):
         data_to_plot = []
-        print(graph_data)
 
+        # Extract data from graph_data and create new list data_to_plot
         add_zero = False
         value = 0
         for day_index in range(self.days_count):

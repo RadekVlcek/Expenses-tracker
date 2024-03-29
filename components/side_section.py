@@ -132,11 +132,12 @@ class Side_section(Window, Database):
         selected_month = Window.selected_month
         days_count_to_plot = Window.months[selected_month]
 
+        # Pass graph data
+        graph_data = self.fetch_db_graph_data()
+
         # Create instance of Graph class
         self.graph = Graph(days_count_to_plot)
 
-        # Pass graph data
-        graph_data = self.fetch_db_graph_data()
         self.graph.collect_data(graph_data)
 
         # Display graph 
