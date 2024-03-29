@@ -16,8 +16,11 @@ class Init_window(Window, Database):
         value = self.init_rem_value_entry.get()
         
         if value.isdigit():
-            # Store the value in DB
-            self.insert_remaining_balance_table(value)
+            if int(value) > 0:
+                # Store the value in DB
+                self.insert_remaining_balance_table(value)
+            else:
+                messagebox.showinfo(self.window, message="Current balance cannot be zero.")
         else:
             messagebox.showinfo(self.window, message="Please enter a valid number.")
 

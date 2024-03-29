@@ -112,12 +112,13 @@ class Month(Window, Database):
         self.pass_bottom_section_figures(total_monthly_spent, new_remaining_balance)
 
     def update_graph(self):
-        side_section = Side_section(self.day_id, self.month_id, self.year_id)
+        pass
+        #side_section = Side_section(self.day_id, self.month_id, self.year_id)
         #side_section.init_and_display_all()
-        side_section.initiate_frame7()
-        side_section.initiate_frame6()
-        side_section.display_frame7()
-        side_section.display_frame6()
+       # side_section.initiate_frame7()
+       # side_section.initiate_frame6()
+       # side_section.display_frame7()
+       # side_section.display_frame6()
 
     def return_new_bottom_section_figures(self):
         return self.total_spent_this_month, self.new_remaining_balance

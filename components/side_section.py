@@ -125,18 +125,21 @@ class Side_section(Window, Database):
         Database.__init__(self, self.db_file)
         selected_month = Window.selected_month
         unordered_data = Database.fetch_monthitem_for_graph(self, selected_month)
-        print(unordered_data)
+        
+        return unordered_data
 
     def handle_graph(self):
         selected_month = Window.selected_month
-        months = Window.months
-        days_count_to_plot = months[selected_month]
-
-        self.fetch_db_graph_data()
+        days_count_to_plot = Window.months[selected_month]
 
         # Create instance of Graph class
         self.graph = Graph(days_count_to_plot)
-        self.graph.collect_data()
-        self.graph.generate_graph_image()
+
+        # Pass graph data
+        graph_data = self.fetch_db_graph_data()
+        self.graph.collect_data(graph_data)
+
+        # Display graph 
+        self.graph.display_graph()
 
         #self.graph.close_graph()

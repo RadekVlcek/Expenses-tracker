@@ -20,5 +20,9 @@ class Top_right_section(Window):
         self.current_date_selected = Label(frame8, text=f"{selected_day}. {selected_month}, {selected_year}", font=("Verdana", 21), fg="white", bg=self.look_feel_settings["dark_blue"])
         self.current_date_selected.grid(column=0, row=0)
 
+        # Settings menu
+        #self.options_menu = Label(frame8, text="...", font=("Verdana", 21), fg="white", bg=self.look_feel_settings["dark_blue"])
+        #self.options_menu.grid(column=1, row=0, sticky="e")
+
     def pass_top_right_section(self):
         return self.current_date_selected
