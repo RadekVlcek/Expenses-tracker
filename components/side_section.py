@@ -83,16 +83,22 @@ class Side_section(Window, Database):
 
     # Display everything inside Frame 6
     def display_frame6(self):
-        from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-        # Generate graph image
-        self.handle_graph()
+        graph_data = self.fetch_db_graph_data()
 
-        # Display graph image inside frame6
-        self.frame6.grid(column=0, row=2)
+        if not graph_data:
+            print('No graph data.')
+            #Label(self.frame6, text="Graph not available.", bg=self.look_feel_settings["dark_blue"], fg="white", font=("Verdana", 20)).grid(column=0, row=0)
+        else:
+            # Generate graph image
+            self.handle_graph(graph_data)
 
-        self.canvas = FigureCanvasTkAgg(self.graph.fig, master=self.frame6)
-        self.canvas.draw()
-        self.canvas.get_tk_widget().grid(column=0, row=0)
+            # Display graph image inside frame6
+            self.frame6.grid(column=0, row=2)
+
+            from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+            canvas = FigureCanvasTkAgg(self.graph.fig, master=self.frame6)
+            canvas.draw()
+            canvas.get_tk_widget().grid(column=0, row=0)
 
     # Display everything inside Frame 5
     def display_frame5(self):
@@ -128,12 +134,12 @@ class Side_section(Window, Database):
         
         return unordered_data
 
-    def handle_graph(self):
+    def handle_graph(self, graph_data):
         selected_month = Window.selected_month
         days_count_to_plot = Window.months[selected_month]
 
-        # Pass graph data
-        graph_data = self.fetch_db_graph_data()
+      #  # Pass graph data
+       # graph_data = self.fetch_db_graph_data()
 
         # Create instance of Graph class
         self.graph = Graph(days_count_to_plot)
