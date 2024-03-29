@@ -6,7 +6,8 @@ from database.database import Database
 
 class Init_window(Window, Database):
 
-    def __init__(self):
+    def __init__(self, window_obj):
+        self.window_obj = window_obj
         self.window = super().window
         self.look_feel_settings = super().look_feel_settings
         self.remaining_balance = 0
@@ -19,6 +20,9 @@ class Init_window(Window, Database):
             if int(value) > 0:
                 # Store the value in DB
                 self.insert_remaining_balance_table(value)
+
+                from init import display_main_window
+                display_main_window(self.window_obj)
             else:
                 messagebox.showinfo(self.window, message="Current balance cannot be zero.")
         else:

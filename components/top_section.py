@@ -74,10 +74,10 @@ class Top_section(Day, Month, Window):
         month_id = Window.selected_month
 
         if self.validate_data(item_name, item_price, item_remark):
-            # Update DayItem database
+            # Update DayItem table
             Day.insert_dayitem_to_db(self, day_id, month_id, item_name, item_price, item_remark)
 
-            # Update MonthItem database
+            # Update MonthItem table
             Month.handle_month_input(self, int(item_price))
 
             # Trigger displaing updated remaining balance
