@@ -20,7 +20,7 @@ class Graph:
                     value = d[1]
                     break
                 else:
-                    value = 0
+                    value = None
 
             data_to_plot.append(value)
             value = 0

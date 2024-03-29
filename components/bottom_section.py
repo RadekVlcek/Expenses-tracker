@@ -16,7 +16,7 @@ class Bottom_section(Window):
         self.f5_rem_balance_label = Label(self.frame9, text="Current remaining balance ", fg="white", bg=self.look_feel_settings["dark_blue"])
         self.f5_rem_balance_value = Label(self.frame9, text="", fg="white", bg=self.look_feel_settings["dark_blue"], font=("Verdana", 24))
 
-        self.f5_total_spent_label = Label(self.frame9, text="Total spent this month ", fg="white", bg=self.look_feel_settings["dark_blue"])
+        self.f5_total_spent_label = Label(self.frame9, text=f"Total spent in {Window.selected_month}", fg="white", bg=self.look_feel_settings["dark_blue"])
         self.f5_total_spent_value = Label(self.frame9, text="", fg="white", bg=self.look_feel_settings["dark_blue"], font=("Verdana", 24))
 
     def display_frame9(self):

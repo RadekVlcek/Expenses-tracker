@@ -12,7 +12,6 @@ class Day(Window, Database):
         self.look_feel_settings = month_obj.look_feel_settings
         self.pass_top_right_section = pass_top_right_section
         self.db_file = Window.db_file
-        self.selected_day_frame_label = None
 
     def display_day(self, row, col):
         self.f3_day_frame = Frame(self.frame3, bd=1, relief="solid")
@@ -50,8 +49,8 @@ class Day(Window, Database):
         self.f3_day_frame.config(bg=self.look_feel_settings["lighter_blue"], highlightthickness=today_button_props)
 
         # Configure button on-hover and off-hover color
-        self.f3_day_frame.bind("<Enter>", self.handle_hover_enter)
-        self.f3_day_frame.bind("<Leave>", self.handle_hover_leave)
+        self.f3_day_frame.bind("<Enter>", self.handle_day_hover_enter)
+        self.f3_day_frame.bind("<Leave>", self.handle_day_hover_leave)
 
         # Configure binding to handle_day_click function
         self.f3_day_frame.bind("<Button-1>", partial(self.handle_day_click, day_index, self.f3_day_frame))
@@ -67,12 +66,12 @@ class Day(Window, Database):
         self.spent_per_day_label.grid(row=1, column=0, columnspan=2, sticky="")
         self.spent_per_day_label.bind("<Button-1>", partial(self.handle_day_click, day_index, self.f3_day_frame))
     
-    def handle_hover_enter(self, event):
+    def handle_day_hover_enter(self, event):
         self.f3_day_frame.config(bg=self.look_feel_settings["button_hover_enter"])
         self.day_label.config(bg=self.look_feel_settings["button_hover_enter"])
         self.spent_per_day_label.config(bg=self.look_feel_settings["button_hover_enter"])
 
-    def handle_hover_leave(self, event):
+    def handle_day_hover_leave(self, event):
         self.f3_day_frame.config(bg=self.look_feel_settings["lighter_blue"])
         self.day_label.config(bg=self.look_feel_settings["lighter_blue"])
         self.spent_per_day_label.config(bg=self.look_feel_settings["lighter_blue"])

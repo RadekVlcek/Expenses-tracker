@@ -9,7 +9,7 @@ class Database:
         except sqlite3.Error as e:
             print(f"DB: Error: {e}")
         else:
-            print("DB: Database connected")
+            print("DB: Database connected.")
 
     # Day functions
     def create_day_table(self):
