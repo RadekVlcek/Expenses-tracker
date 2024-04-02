@@ -165,8 +165,8 @@ class Top_section(Day, Month, Window):
         self.f2_remark_input.grid(row=0, column=6, sticky="w")
 
         # Save button
-        f = Frame(frame2, bg=self.look_feel_settings["lighter_blue"], highlightthickness=1, highlightbackground="white")
+        f = Frame(frame2, highlightthickness=0)
         f.grid(row=0, column=7)
-        f2_save_btn = Label(f, text="Save", width=5, height=2, fg="white", bg=self.look_feel_settings["lighter_blue"])
+        f2_save_btn = Button(f, text="Save", width=4, height=1, fg=self.look_feel_settings["dark_blue"], bg=self.look_feel_settings["dark_blue"], highlightthickness=0, highlightbackground=self.look_feel_settings["dark_blue"])
         f2_save_btn.grid(row=0, column=0, sticky="nswe")
         f2_save_btn.bind("<Button-1>", self.save_data)

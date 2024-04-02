@@ -21,6 +21,7 @@ class Init_window(Window, Database):
                 # Store the value in DB
                 self.insert_remaining_balance_table(value)
 
+                # Proceed to displaying main window
                 from init import display_main_window
                 display_main_window(self.window_obj)
             else:
