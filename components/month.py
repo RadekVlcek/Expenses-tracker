@@ -1,9 +1,9 @@
 from tkinter import *
 import tkinter.ttk as tk
-from window import Window
+from components.window import Window
 from database.database import Database
-from components.bottom_section import Bottom_section
-from components.side_section import Side_section
+from sections.bottom_section import Bottom_section
+from sections.side_section import Side_section
 
 class Month(Window, Database):
     def __init__(self, month, days_count):

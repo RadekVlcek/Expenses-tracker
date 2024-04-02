@@ -1,7 +1,7 @@
 from tkinter import *
 import tkinter.ttk as tk
 from tkinter import messagebox
-from window import Window
+from components.window import Window
 from database.database import Database
 
 class Init_window(Window, Database):

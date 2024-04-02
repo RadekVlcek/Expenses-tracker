@@ -1,6 +1,6 @@
 from tkinter import *
 import tkinter.ttk as tk
-from window import Window
+from components.window import Window
 
 class Bottom_section(Window):
 

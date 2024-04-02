@@ -4,10 +4,10 @@ from tkinter import messagebox
 from datetime import date
 from functools import partial
 from database.database import Database
-from components.side_section import Side_section
-from day import Day
-from month import Month
-from window import Window
+from sections.side_section import Side_section
+from components.day import Day
+from components.month import Month
+from components.window import Window
 
 class Top_section(Day, Month, Window):
 

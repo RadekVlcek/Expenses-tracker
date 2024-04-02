@@ -2,13 +2,12 @@
 
 # Process main window
 def display_main_window(window_obj):
-
-    from month import Month
-    from day import Day
-    from components.top_section import Top_section
-    from components.top_right_section import Top_right_section
-    from components.side_section import Side_section
-    from components.bottom_section import Bottom_section
+    from components.month import Month
+    from components.day import Day
+    from sections.top_section import Top_section
+    from sections.top_right_section import Top_right_section
+    from sections.side_section import Side_section
+    from sections.bottom_section import Bottom_section
     from database.database import Database
 
     top_section_obj = Top_section()

@@ -1,9 +1,9 @@
 from tkinter import *
 import tkinter.ttk as tk
-from PIL import ImageTk, Image
-from window import Window
+from components.window import Window
 from database.database import Database
-from graph import Graph
+from components.graph import Graph
+from PIL import ImageTk, Image
 
 class Side_section(Window, Database):
 

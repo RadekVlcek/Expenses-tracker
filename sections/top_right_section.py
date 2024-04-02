@@ -1,6 +1,6 @@
 from tkinter import *
 import tkinter.ttk as tk
-from window import Window
+from components.window import Window
 
 class Top_right_section(Window):
 

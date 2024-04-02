@@ -1,7 +1,7 @@
 if __name__ == "__main__":
     import init
     import os
-    from window import Window
+    from components.window import Window
 
     # Initiate main window
     window_obj = Window()

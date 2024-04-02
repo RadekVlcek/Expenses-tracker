@@ -1,8 +1,8 @@
 from tkinter import *
 import tkinter.ttk as tk
-from window import Window
+from components.window import Window
 from database.database import Database
-from components.side_section import Side_section
+from sections.side_section import Side_section
 from functools import partial
 
 class Day(Window, Database):
