@@ -10,7 +10,6 @@ from components.month import Month
 from components.window import Window
 
 class Top_section(Day, Month, Window):
-
     month_indices = {
        "January": 0,
        "February": 1,

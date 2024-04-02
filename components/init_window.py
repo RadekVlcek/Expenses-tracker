@@ -5,7 +5,6 @@ from components.window import Window
 from database.database import Database
 
 class Init_window(Window, Database):
-
     def __init__(self, window_obj):
         self.window_obj = window_obj
         self.window = super().window

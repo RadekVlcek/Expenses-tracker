@@ -3,7 +3,6 @@ import tkinter.ttk as tk
 from components.window import Window
 
 class Bottom_section(Window):
-
     def __init__(self):
         self.window = super().window
         self.look_feel_settings = super().look_feel_settings

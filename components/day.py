@@ -6,7 +6,6 @@ from sections.side_section import Side_section
 from functools import partial
 
 class Day(Window, Database):
-
     def __init__(self, month_obj, pass_top_right_section):
         self.frame3 = month_obj.frame3
         self.look_feel_settings = month_obj.look_feel_settings

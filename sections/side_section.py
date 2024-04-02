@@ -6,7 +6,6 @@ from components.graph import Graph
 from PIL import ImageTk, Image
 
 class Side_section(Window, Database):
-
     def __init__(self, selected_day, selected_month, selected_year):
         self.window = super().window
         self.look_feel_settings = super().look_feel_settings

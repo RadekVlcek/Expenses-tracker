@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 class Graph:
-
     def __init__(self, days_count):
         self.x_axis = []
         self.y_axis = []
@@ -24,9 +23,6 @@ class Graph:
 
             data_to_plot.append(value)
             value = 0
-
-        print(self.days_count)
-        print(data_to_plot, " -> ", len(data_to_plot))
 
         self.x_axis = range(0, self.days_count)
         self.y_axis = data_to_plot
