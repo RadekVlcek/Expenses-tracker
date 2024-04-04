@@ -185,7 +185,7 @@ class Database:
             print("DB: DayItem table: All daily data fetched.")
             return int(fetched_data[0][0])
 
-"""
+
     def __del__(self):
         try:
             self.conn.close()
@@ -194,4 +194,4 @@ class Database:
         else:
             print("DB: Database closed. \n")
 
- """
+ 

@@ -21,16 +21,25 @@ class Side_section(Window, Database):
         data = Database.fetch_dayitem_data(self, self.selected_day, self.selected_month)
         return data
 
-    def fetch_frame5_data(self):
+    def fetch_frame5_data0(self):
         Database.__init__(self, self.db_file)
         daily_total_spent_db = Database.fetch_monthitem_total_daily_spent(self, self.selected_day, self.selected_month)
-        remaining_balance_today_db = Database.fetch_monthitem_remaining_balance(self, self.selected_day, self.selected_month)
 
         # Check if daily_total_spent for the day is empty:
         if not daily_total_spent_db:
-            return "0"
+            return ""
         else:
-            return f"{daily_total_spent_db[0][0]}", f"{remaining_balance_today_db[0][0]}"
+            return f"Total spent today: €{daily_total_spent_db[0][0]}"
+
+    def fetch_frame5_data1(self):
+        Database.__init__(self, self.db_file)
+        remaining_balance_today_db = Database.fetch_monthitem_remaining_balance(self, self.selected_day, self.selected_month)
+
+        # Check if daily_total_spent for the day is empty:
+        if not remaining_balance_today_db:
+            return ""
+        else:
+            return f"Remaining balance today: €{remaining_balance_today_db[0][0]}"
 
     def display_frame4_data(self):
         data = self.fetch_frame4_data()
@@ -48,9 +57,10 @@ class Side_section(Window, Database):
             Label(self.frame4, text="No spendings logged", fg="white", bg=self.look_feel_settings["dark_blue"]).grid(column=1, row=2)
 
     def display_frame5_data(self):
-        data = self.fetch_frame5_data()
-        self.total_spent_today_label.config(text=f"Total spent today: €{data[0]}")
-        self.rem_balance_today_label.config(text=f"Remaining balance today: €{data[1]}")
+        data0 = self.fetch_frame5_data0()
+        data1 = self.fetch_frame5_data1()
+        self.total_spent_today_label.config(text=f"{data0}")
+        self.rem_balance_today_label.config(text=f"{data1}")
 
     # Initiate everything inside Frame 7
     def initiate_frame7(self):
