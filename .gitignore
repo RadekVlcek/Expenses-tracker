@@ -4,4 +4,3 @@ data.db
 # ignore all .pyc cache files
 __pycache__/
 *.pyc
-

@@ -86,7 +86,6 @@ class Side_section(Window, Database):
 
         if not graph_data:
             print('No graph data.')
-            #Label(self.frame6, text="Graph not available.", bg=self.look_feel_settings["dark_blue"], fg="white", font=("Verdana", 20)).grid(column=0, row=0)
         else:
             # Generate graph image
             self.handle_graph(graph_data)
@@ -94,6 +93,7 @@ class Side_section(Window, Database):
             # Display graph image inside frame6
             self.frame6.grid(column=0, row=2)
 
+            # Draw the graph
             from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
             canvas = FigureCanvasTkAgg(self.graph.fig, master=self.frame6)
             canvas.draw()
@@ -104,7 +104,6 @@ class Side_section(Window, Database):
         self.frame5.grid(column=0, row=1, sticky="")
         self.total_spent_today_label.grid(column=0, row=0)
         self.rem_balance_today_label.grid(column=0, row=1)
-        #self.frame5.grid_propagate(False)
     
     # Display everything inside Frame 4
     def display_frame4(self):
@@ -137,12 +136,10 @@ class Side_section(Window, Database):
         selected_month = Window.selected_month
         days_count_to_plot = Window.months[selected_month]
 
-      #  # Pass graph data
-       # graph_data = self.fetch_db_graph_data()
-
         # Create instance of Graph class
         self.graph = Graph(days_count_to_plot)
 
+        # Pass graph data
         self.graph.collect_data(graph_data)
 
         # Display graph 
