@@ -53,8 +53,6 @@ class Side_section(Window, Database):
                 Label(self.frame4, text=item_name, fg="white", bg=self.look_feel_settings["dark_blue"]).grid(column=0, row=index+1, sticky="we")
                 Label(self.frame4, text=item_price, fg="white", bg=self.look_feel_settings["dark_blue"]).grid(column=1, row=index+1, sticky="we")
                 Label(self.frame4, text=item_remark, fg="white", bg=self.look_feel_settings["dark_blue"]).grid(column=2, row=index+1, sticky="we")
-        else:
-            Label(self.frame4, text="No spendings logged", fg="white", bg=self.look_feel_settings["dark_blue"]).grid(column=1, row=2)
 
     def display_frame5_data(self):
         data0 = self.fetch_frame5_data0()
