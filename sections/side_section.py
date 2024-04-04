@@ -28,7 +28,7 @@ class Side_section(Window, Database):
 
         # Check if daily_total_spent for the day is empty:
         if not daily_total_spent_db:
-            return "€0"
+            return "0"
         else:
             return f"{daily_total_spent_db[0][0]}", f"{remaining_balance_today_db[0][0]}"
 
