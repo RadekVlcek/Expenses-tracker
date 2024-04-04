@@ -14,7 +14,7 @@ class Day(Window, Database):
 
     def display_day(self, row, col):
         self.f3_day_frame = Frame(self.frame3, bd=1, relief="solid")
-        self.f3_day_frame.grid(row=row, column=col, padx=5, pady=5)
+        self.f3_day_frame.grid(row=row, column=col, padx=3, pady=3)
 
     def fetch_monthitem_total_daily_spent(self, day_id, month_id):
         Database.__init__(self, self.db_file)
