@@ -107,11 +107,11 @@ class Top_section(Day, Month, Window):
                 if not item_name.isdigit():
                     return True
                 else:
-                    messagebox.showinfo(self.window, message="Item bought must be a text.")
+                    messagebox.showinfo(self.window, message="Item name must be a text.")
             else:
-                messagebox.showinfo(self.window, message="Amount spent must be a number.")
+                messagebox.showinfo(self.window, message="Item price must be a number.")
         else:
-            messagebox.showerror(self.window, message="Text fields cannot be empty")
+            messagebox.showerror(self.window, message="Item name and price cannot be empty.")
     
     def clear_entries(self):
         self.f2_item_bought_input.delete(0, END)
