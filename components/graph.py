@@ -6,6 +6,7 @@ class Graph:
         self.x_axis = []
         self.y_axis = []
         self.days_count = days_count
+        self.fig_number = 1
 
     def collect_data(self, graph_data):
         data_to_plot = []
@@ -31,7 +32,12 @@ class Graph:
         plt.figure(figsize=(3.4, 2.5))
         plt.stem(self.x_axis, self.y_axis, linefmt='#193c67', markerfmt='#193c67', basefmt="#193c67")  # Adjust line and marker formats
         plt.tight_layout(pad=0.4)  # Adjust layout
-        self.fig = plt.gcf()
 
-    def close_graph(self):
-        plt.close(self.fig)
+        try:
+            self.fig
+        except AttributeError as e:
+            print("Doesn't exist...")
+            self.fig = plt.gcf()
+        else:
+            self.plt.close(self.fig)
+            print("closing fig")

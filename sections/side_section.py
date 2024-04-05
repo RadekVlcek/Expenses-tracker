@@ -78,8 +78,15 @@ class Side_section(Window, Database):
 
     # Initiate everything inside Frame 4
     def initiate_frame4(self):
-        self.frame4 = Frame(self.frame7, bd=0, bg=self.look_feel_settings["dark_blue"], height=30, width=20)
-        self.frame4.grid_propagate(1)
+        #self.frame4 = Frame(self.frame7, bd=0, bg=self.look_feel_settings["dark_blue"], height=30, width=20)
+
+        from tkinter import scrolledtext         
+
+        self.frame4 = scrolledtext.ScrolledText(self.window, highlightthickness=0, bg=self.look_feel_settings["dark_blue"], height=15)
+
+        #self.frame4 = Frame(self.window, bd=0, bg=self.look_feel_settings["dark_blue"], height=30, width=20)
+        
+        #self.frame4.grid_propagate(1)
         self.item_bought_label = Label(self.frame4, text="Item name", fg="white", bg=self.look_feel_settings["dark_blue"], font=("Verdana", 13, "bold"), pady=10)
         self.amount_spent_label = Label(self.frame4, text="Item price (€)", fg="white", bg=self.look_feel_settings["dark_blue"], font=("Verdana", 13, "bold"), pady=10)
         self.remark_label = Label(self.frame4, text="Remark", fg="white", bg=self.look_feel_settings["dark_blue"], font=("Verdana", 13, "bold"), pady=10)
@@ -115,7 +122,7 @@ class Side_section(Window, Database):
     
     # Display everything inside Frame 4
     def display_frame4(self):
-        self.frame4.grid(column=0, row=0, sticky="n", columnspan=3)
+        self.frame4.grid(column=1, row=1, columnspan=3, sticky="n")
         #self.frame4.grid_propagate(False)
         self.item_bought_label.grid(column=0, row=0, padx=15, sticky="n")
         self.amount_spent_label.grid(column=1, row=0, padx=15, sticky="n")
@@ -152,5 +159,3 @@ class Side_section(Window, Database):
 
         # Display graph 
         self.graph.display_graph()
-
-        #self.graph.close_graph()
