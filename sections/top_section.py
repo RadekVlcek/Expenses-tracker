@@ -111,7 +111,7 @@ class Top_section(Day, Month, Window):
             else:
                 messagebox.showinfo(self.window, message="Item price must be a number.")
         else:
-            messagebox.showerror(self.window, message="Item name and price cannot be empty.")
+            messagebox.showerror(self.window, message="Item name and item price cannot be empty.")
     
     def clear_entries(self):
         self.f2_item_bought_input.delete(0, END)

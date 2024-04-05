@@ -109,9 +109,9 @@ class Side_section(Window, Database):
 
     # Display everything inside Frame 5
     def display_frame5(self):
-        self.frame5.grid(column=0, row=1, sticky="")
-        self.total_spent_today_label.grid(column=0, row=0)
-        self.rem_balance_today_label.grid(column=0, row=1)
+        self.frame5.grid(column=0, row=1, sticky="s")
+        self.total_spent_today_label.grid(column=0, row=0, sticky="w")
+        self.rem_balance_today_label.grid(column=0, row=1, sticky="w")
     
     # Display everything inside Frame 4
     def display_frame4(self):
