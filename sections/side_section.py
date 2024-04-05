@@ -80,9 +80,9 @@ class Side_section(Window, Database):
     def initiate_frame4(self):
         self.frame4 = Frame(self.frame7, bd=0, bg=self.look_feel_settings["dark_blue"], height=30, width=20)
         self.frame4.grid_propagate(1)
-        self.item_bought_label = Label(self.frame4, text="Item name", fg="white", bg=self.look_feel_settings["dark_blue"])
-        self.amount_spent_label = Label(self.frame4, text="Item price (€)", fg="white", bg=self.look_feel_settings["dark_blue"])
-        self.remark_label = Label(self.frame4, text="Remark", fg="white", bg=self.look_feel_settings["dark_blue"])
+        self.item_bought_label = Label(self.frame4, text="Item name", fg="white", bg=self.look_feel_settings["dark_blue"], font=("Verdana", 13, "bold"), pady=10)
+        self.amount_spent_label = Label(self.frame4, text="Item price (€)", fg="white", bg=self.look_feel_settings["dark_blue"], font=("Verdana", 13, "bold"), pady=10)
+        self.remark_label = Label(self.frame4, text="Remark", fg="white", bg=self.look_feel_settings["dark_blue"], font=("Verdana", 13, "bold"), pady=10)
 
     # Display Frame 7
     def display_frame7(self):
@@ -99,7 +99,7 @@ class Side_section(Window, Database):
             self.handle_graph(graph_data)
 
             # Display graph image inside frame6
-            self.frame6.grid(column=0, row=2)
+            self.frame6.grid(column=0, row=2, sticky="s", pady=(0, 25))
 
             # Draw the graph
             from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg

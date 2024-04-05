@@ -48,7 +48,7 @@ class Top_section(Day, Month, Window):
         Month.fetch_bottom_section_figures(self, selected_month)
 
         # Update graph with new data
-        Month.update_graph(self)
+        #Month.update_graph(self)
 
     def update_selected_month(self, new_month):
         Window.selected_month = new_month
@@ -93,7 +93,7 @@ class Top_section(Day, Month, Window):
             Month.fetch_bottom_section_figures(self, month_id)
 
             # Update graph with new data
-            Month.update_graph(self)
+            #Month.update_graph(self)
 
     def update_side_section_data(self):
         side_section = Side_section(Window.selected_day, Window.selected_month, Window.selected_year)
