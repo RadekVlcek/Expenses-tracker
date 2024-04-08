@@ -36,7 +36,7 @@ class Graph:
         try:
             self.fig
         except AttributeError as e:
-            print("Doesn't exist...")
+            print("Doesn't exist: ", e)
             self.fig = plt.gcf()
         else:
             self.plt.close(self.fig)
