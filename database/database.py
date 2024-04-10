@@ -193,5 +193,3 @@ class Database:
             print(e)
         else:
             print("DB: Database closed. \n")
-
- 

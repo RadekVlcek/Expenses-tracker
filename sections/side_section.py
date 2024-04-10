@@ -1,5 +1,6 @@
 from tkinter import *
 import tkinter.ttk as tk
+from tkinter import scrolledtext         
 from components.window import Window
 from database.database import Database
 from components.graph import Graph
@@ -79,9 +80,6 @@ class Side_section(Window, Database):
     # Initiate everything inside Frame 4
     def initiate_frame4(self):
         #self.frame4 = Frame(self.frame7, bd=0, bg=self.look_feel_settings["dark_blue"], height=30, width=20)
-
-        from tkinter import scrolledtext         
-
         self.frame4 = scrolledtext.ScrolledText(self.window, highlightthickness=0, bg=self.look_feel_settings["dark_blue"], height=15)
 
         #self.frame4 = Frame(self.window, bd=0, bg=self.look_feel_settings["dark_blue"], height=30, width=20)
