@@ -6,7 +6,6 @@ class Graph:
         self.x_axis = []
         self.y_axis = []
         self.days_count = days_count
-        self.fig_number = 1
 
     def collect_data(self, graph_data):
         data_to_plot = []
@@ -39,5 +38,5 @@ class Graph:
             print("Doesn't exist: ", e)
             self.fig = plt.gcf()
         else:
-            self.plt.close(self.fig)
+            plt.close(self.fig)
             print("closing fig")

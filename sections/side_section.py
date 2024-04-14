@@ -126,18 +126,6 @@ class Side_section(Window, Database):
         self.amount_spent_label.grid(column=1, row=0, padx=15, sticky="n")
         self.remark_label.grid(column=2, row=0, padx=15, sticky="n")
 
-    # Initiate and display all frames together
-    def init_and_display_all(self):
-        self.initiate_frame7()
-        self.initiate_frame4()
-        self.initiate_frame5()
-        self.initiate_frame6()
-    
-        self.display_frame7()
-        self.display_frame4()
-        self.display_frame5()
-        self.display_frame6()
-
     def fetch_db_graph_data(self):
         Database.__init__(self, self.db_file)
         selected_month = Window.selected_month
@@ -157,3 +145,15 @@ class Side_section(Window, Database):
 
         # Display graph 
         self.graph.display_graph()
+
+    # Initiate and display all frames together
+    def init_and_display_all(self):
+        self.initiate_frame7()
+        self.initiate_frame4()
+        self.initiate_frame5()
+        self.initiate_frame6()
+    
+        self.display_frame7()
+        self.display_frame4()
+        self.display_frame5()
+        self.display_frame6()
