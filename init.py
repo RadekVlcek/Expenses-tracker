@@ -8,7 +8,6 @@ def display_main_window(window_obj):
     from sections.top_right_section import Top_right_section
     from sections.side_section import Side_section
     from sections.bottom_section import Bottom_section
-    from database.database import Database
 
     top_section_obj = Top_section()
     top_right_section_obj = Top_right_section()
