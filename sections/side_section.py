@@ -1,6 +1,5 @@
 from tkinter import *
-import tkinter.ttk as tk
-from tkinter import scrolledtext         
+import tkinter.ttk as tk   
 from components.window import Window
 from database.database import Database
 from components.graph import Graph
@@ -79,12 +78,9 @@ class Side_section(Window, Database):
 
     # Initiate everything inside Frame 4
     def initiate_frame4(self):
-        #self.frame4 = Frame(self.frame7, bd=0, bg=self.look_feel_settings["dark_blue"], height=30, width=20)
-        self.frame4 = scrolledtext.ScrolledText(self.window, highlightthickness=0, bg=self.look_feel_settings["dark_blue"], height=15)
+        self.frame4 = Frame(self.frame7, bd=0, bg=self.look_feel_settings["dark_blue"], height=30, width=20)
+        self.frame4 = Frame(self.window, bd=0, bg=self.look_feel_settings["dark_blue"], height=30, width=20)
 
-        #self.frame4 = Frame(self.window, bd=0, bg=self.look_feel_settings["dark_blue"], height=30, width=20)
-        
-        #self.frame4.grid_propagate(1)
         self.item_bought_label = Label(self.frame4, text="Item name", fg="white", bg=self.look_feel_settings["dark_blue"], font=("Verdana", 13, "bold"), pady=10)
         self.amount_spent_label = Label(self.frame4, text="Item price (€)", fg="white", bg=self.look_feel_settings["dark_blue"], font=("Verdana", 13, "bold"), pady=10)
         self.remark_label = Label(self.frame4, text="Remark", fg="white", bg=self.look_feel_settings["dark_blue"], font=("Verdana", 13, "bold"), pady=10)
