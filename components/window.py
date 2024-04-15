@@ -58,8 +58,8 @@ class Window:
         window_height = self.window.winfo_screenwidth()
         window_width = self.window.winfo_screenheight()
 
-        self.window.geometry("1440x900")
-        self.window.minsize(1440, 900)
+        self.window.geometry("1440x775")
+        self.window.minsize(1440, 775)
         self.window.title("Expenses Tracker")
         self.window.configure(bg="#0a1829")
 
